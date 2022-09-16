@@ -1,0 +1,25 @@
+body{
+    background-color: #233642;
+    margin:0;
+    padding: 0;
+}
+
+button{
+    background-color: #E1D288;
+    margin: 20px;
+    padding: 7px 17px;
+    border-radius: 20px;
+    border: 0ch;
+    font-size: 1rem;
+}
+
+.container{
+    background-color: #E7E1CA;
+    margin: 10% auto;
+    padding: 60px 30px;
+    text-align: center;
+    font-size: 3ex; 
+    max-width: 650px;
+    max-height: 350px;
+    border-radius: 3%;
+}

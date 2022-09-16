@@ -1,0 +1,22 @@
+*{
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.up-bar_background{
+    display: flex;
+    justify-content: space-between;
+    max-width: 1920px;
+    max-height: 115px;
+    background-color: #3C7A89;
+    margin: 0;
+    padding: 15px 30%;
+}
+
+.up-bar_background p{
+    color: #E1D288;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3rem;
+    text-align: center;
+    margin: auto;
+}
