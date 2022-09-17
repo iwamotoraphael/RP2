@@ -1,0 +1,25 @@
+body{
+    background-color: #233642;
+    margin:0;
+    padding: 0;
+}
+
+.container{
+    background-color: #E7E1CA;
+    margin: 10% auto;
+    padding: 60px 30px;
+    text-align: left;
+    font-size: 3ex; 
+    max-width: 650px;
+    max-height: 350px;
+    border-radius: 3%;
+}
+
+.button_container{
+    margin: 20px;
+    display: inline-block;
+}
+
+.input_name{
+    margin: 0;
+}

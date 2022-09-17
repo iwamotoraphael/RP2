@@ -4,7 +4,8 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 //import pages
 import FrontPage from "./pages/FrontPage";
-import LoginPage from './pages/LoginPage';
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -12,7 +13,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element = {<FrontPage/>}/>
         <Route path="/login" element = {<LoginPage/>}/>
-        <Route path="/signup" element = {<h1>signup</h1>}/>
+        <Route path="/signup" element = {<SignUpPage/>}/>
       </Routes>
     </Router>
   </React.StrictMode>,
