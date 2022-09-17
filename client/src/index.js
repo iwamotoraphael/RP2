@@ -10,6 +10,8 @@ ReactDOM.render(
     <Router>
       <Routes>
         <Route path="/" element = {<FrontPage/>}/>
+        <Route path="/login" element = {<h1>Login</h1>}/>
+        <Route path="/signup" element = {<h1>signup</h1>}/>
       </Routes>
     </Router>
   </React.StrictMode>,

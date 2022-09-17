@@ -4,15 +4,6 @@ body{
     padding: 0;
 }
 
-button{
-    background-color: #E1D288;
-    margin: 20px;
-    padding: 7px 17px;
-    border-radius: 20px;
-    border: 0ch;
-    font-size: 1rem;
-}
-
 .container{
     background-color: #E7E1CA;
     margin: 10% auto;
@@ -22,4 +13,9 @@ button{
     max-width: 650px;
     max-height: 350px;
     border-radius: 3%;
+}
+
+.button_container{
+    margin: 20px;
+    display: inline-block;
 }
