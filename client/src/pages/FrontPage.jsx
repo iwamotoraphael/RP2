@@ -2,7 +2,7 @@ import React from "react";
 import UpBar from "../components/UpBar";
 import Button from "../components/Button";
 
-import "../css/FrontPage.css";
+import "../css/pages/FrontPage.css";
 import { useNavigate } from "react-router-dom";
 
 import refugeeImg from "../img/refugee.png";
@@ -31,6 +31,11 @@ const FrontPage = () =>{
                     </div>
                     <div className="button_container">
                         <Button onClick={handleSignUpClick}>Sign Up</Button>
+                    </div>
+                    <div className="button_container">
+                        <a href="/home">
+                            <Button>Botão secreto</Button>
+                        </a>
                     </div>
                 </div>
                 <img src={refugeeImg} alt=""/>

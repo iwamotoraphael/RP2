@@ -1,0 +1,22 @@
+.navbar {
+    margin: 0 auto;
+    position: absolute;
+    right: 25px;  
+}
+
+.navbar-item {
+    display: block;
+    width: 90px;
+    float: left;
+    text-align: center;
+    margin: 5px;
+}
+
+.navbar-item img {
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-item div {
+    font-size: 15px;
+}

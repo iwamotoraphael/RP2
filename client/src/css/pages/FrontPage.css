@@ -1,9 +1,3 @@
-body{
-    background-color: var(--amareloClaro);
-    margin:0;
-    padding: 0;
-}
-
 .container-frontpage{
     margin: 8% auto;
     padding: 60px 30px;

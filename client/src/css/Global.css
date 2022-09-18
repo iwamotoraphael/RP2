@@ -18,6 +18,12 @@ h2 {
     --branco: #FFFFFF;
 }
 
+body{
+  background-color: var(--azulEscuro);
+  margin:0;
+  padding: 0;
+}
+
 *::selection {
     background: var(--amareloClaro);
     color: var(--preto);
@@ -37,6 +43,20 @@ h2 {
   
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--preto);
+  }
+  
+  a:visited {
+    color: var(--preto);
+  }
+  
+  a:hover {
+    color: var(--amareloClaro);
+    transition-duration: 0.3s;
   }
   
   

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import "../css/Button.css";
+import "../css/components/Button.css";
 
 const Button = ({children, onClick}) => {
     return ( <button onClick = {onClick} className='button' >{children}</button> );

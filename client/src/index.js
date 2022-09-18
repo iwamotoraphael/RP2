@@ -5,7 +5,10 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 //import pages
 import FrontPage from "./pages/FrontPage";
 import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage"
+import SignUpPage from "./pages/SignUpPage";
+import HomePage from "./pages/HomePage";
+import NetworkPage from "./pages/NetworkPage";
+import MessagesPage from "./pages/MessagesPage";
 
 import "./css/Global.css";
 
@@ -16,6 +19,9 @@ ReactDOM.render(
         <Route path="/" element = {<FrontPage/>}/>
         <Route path="/login" element = {<LoginPage/>}/>
         <Route path="/signup" element = {<SignUpPage/>}/>
+        <Route path="/home" element = {<HomePage/>}/>
+        <Route path="/network" element = {<NetworkPage/>}/>
+        <Route path="/messages" element = {<MessagesPage/>}/>
       </Routes>
     </Router>
   </React.StrictMode>,

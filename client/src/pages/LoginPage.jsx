@@ -3,9 +3,7 @@ import React, { useState } from 'react'
 import UpBar from "../components/UpBar";
 import Button from "../components/Button";
 
-import "../css/LoginPage.css";
-
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import "../css/pages/LoginPage.css";
 
 import undo from "../img/undo.png";
 
@@ -27,9 +25,9 @@ const LoginPage = () => {
             <UpBar/>
             <div className='login-container'>
 
-                <Link to="/">
+                <a href="/">
                     <img className="undo-button" src={undo} alt="Go back button" />
-                </Link>
+                </a>
 
                 <h2>Login</h2>
                 <form onSubmit={handleSubmit}>
