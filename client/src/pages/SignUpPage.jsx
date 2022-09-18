@@ -5,6 +5,10 @@ import Button from "../components/Button";
 
 import "../css/SignUpPage.css";
 
+import { BrowserRouter as Router, Link } from "react-router-dom";
+
+import undo from "../img/undo.png";
+
 const SignUpPage = () => {
 
     const [userform, setUserForm] = useState({username: '', password: '', confirmPassword: '',})
@@ -28,16 +32,27 @@ const SignUpPage = () => {
     return ( 
         <>
             <UpBar/>
-            <div className='container'>
+            <div className='signup-container'>
+                < Link to="/">
+                    <img className="undo-button" src={undo} alt="Go back button" />
+                </Link>
+
+                <h2>Sign Up</h2>
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor='userName'>Username:</label>
-                    <input name="username" type="text" className='login_input' placeholder='Username' onChange={handleChange}></input>
-                    <label htmlFor='password'>Password:</label>
-                    <input name = "password" type="password" className='login_input' placeholder='Password' onChange={handleChange}></input>
-                    <label htmlFor='confirmPassword'>Confirm password:</label>
-                    <input name = "confirmPassword" type="password" className='login_input' placeholder='Password' onChange={handleChange}></input>
+                    <div className="form-input">
+                        <label htmlFor='userName'>Username:</label>
+                        <input name="username" type="text" className='login_input' placeholder='Username' onChange={handleChange}></input>
+                    </div>
+                    <div className="form-input">
+                        <label htmlFor='password'>Password:</label>
+                        <input name = "password" type="password" className='login_input' placeholder='Password' onChange={handleChange}></input>
+                    </div>
+                    <div className="form-input">
+                        <label htmlFor='confirmPassword'>Confirm password:</label>
+                        <input name = "confirmPassword" type="password" className='login_input' placeholder='Password' onChange={handleChange}></input>
+                    </div>
                     {!isUser && (
-                        <div>
+                        <div className="form-input">
                         <label htmlFor='languages'>Languages:</label>
                         <input name = "languages" type="text" className='login_input' placeholder='Languages' onChange={handleChange}></input>
                         </div>

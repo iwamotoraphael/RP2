@@ -7,6 +7,8 @@ import FrontPage from "./pages/FrontPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage"
 
+import "./css/Global.css";
+
 ReactDOM.render(
   <React.StrictMode>
     <Router>

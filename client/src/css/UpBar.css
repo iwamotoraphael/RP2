@@ -5,18 +5,23 @@
 
 .up-bar_background{
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     max-width: 1920px;
     max-height: 115px;
-    background-color: #3C7A89;
+    background-color: var(--azul);
     margin: 0;
-    padding: 15px 30%;
+    padding: 15px;
 }
 
-.up-bar_background p{
-    color: #E1D288;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 3rem;
-    text-align: center;
-    margin: auto;
+.up-bar_background h1{
+    color: var(--amarelo);
+    font-size: 2.5rem;
+    padding-left: 20px;
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.24);
+}
+
+img {
+    width: 60px;
+    height: 60px;
 }

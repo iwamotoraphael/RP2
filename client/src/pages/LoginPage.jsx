@@ -5,6 +5,10 @@ import Button from "../components/Button";
 
 import "../css/LoginPage.css";
 
+import { BrowserRouter as Router, Link } from "react-router-dom";
+
+import undo from "../img/undo.png";
+
 const LoginPage = () => {
     const [form, setForm] = useState({username: '', password: '',})
 
@@ -21,12 +25,22 @@ const LoginPage = () => {
     return (
         <>
             <UpBar/>
-            <div className='container'>
+            <div className='login-container'>
+
+                <Link to="/">
+                    <img className="undo-button" src={undo} alt="Go back button" />
+                </Link>
+
+                <h2>Login</h2>
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor='userName'>Username:</label>
-                    <input name="username" type="text" className='login_input' placeholder='Username' onChange={handleChange}></input>
-                    <label htmlFor='password'>Password:</label>
-                    <input name = "password" type="password" className='login_input' placeholder='Password' onChange={handleChange}></input>
+                    <div className="form-input">
+                        <label htmlFor='userName'>Username:</label>
+                        <input name="username" type="text" className='login_input' placeholder='Username' onChange={handleChange}></input>
+                    </div>
+                    <div className="form-input">
+                        <label htmlFor='password'>Password:</label>
+                        <input name = "password" type="password" className='login_input' placeholder='Password' onChange={handleChange}></input>
+                    </div>
                     <Button onClick={handleSubmit}>Login</Button>
                 </form>
                 
