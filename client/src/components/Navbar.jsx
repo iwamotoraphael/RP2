@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import "../css/components/Navbar.css"
 
 import language from "../img/language.png";
@@ -9,6 +11,11 @@ import notifications from "../img/notifications.png";
 import signOut from "../img/sign-out.png";
 
 const Navbar = () =>{
+    const history = useNavigate();
+
+    const handleItemCLick = (_route) =>{
+        history(_route)
+    }
 
     return(
         <>
@@ -18,25 +25,19 @@ const Navbar = () =>{
                         <div>Languages</div>
                 </div>
 
-                <div className="navbar-item">
-                    <a href="/home">
+                <div className="navbar-item" onClick={() => handleItemCLick('/home')}>
                         <img src={home} alt="" />
                         <div>Home</div>
-                    </a>
                 </div>
 
-                <div className="navbar-item">
-                    <a href="/network">
+                <div className="navbar-item" onClick={() => handleItemCLick('/network')}>
                         <img src={network} alt="" />
                         <div>Network</div>
-                    </a>
                 </div>
 
-                <div className="navbar-item">
-                    <a href="/messages">
+                <div className="navbar-item" onClick={() => handleItemCLick('/messages')}>
                         <img src={messages} alt="" />
                         <div>Messages</div>
-                    </a>
                 </div>
 
                 <div className="navbar-item">

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 import UpBar from "../components/UpBar";
 import Button from "../components/Button";
@@ -8,6 +9,8 @@ import "../css/pages/LoginPage.css";
 import undo from "../img/undo.png";
 
 const LoginPage = () => {
+    const history = useNavigate();
+
     const [form, setForm] = useState({username: '', password: '',})
 
     const handleSubmit = (e) => {
@@ -25,9 +28,7 @@ const LoginPage = () => {
             <UpBar/>
             <div className='login-container'>
 
-                <a href="/">
-                    <img className="undo-button" src={undo} alt="Go back button" />
-                </a>
+                <img className="undo-button" src={undo} alt="Go back button" onClick = {() => history(-1)}/>
 
                 <h2>Login</h2>
                 <form onSubmit={handleSubmit}>
