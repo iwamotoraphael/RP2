@@ -20,3 +20,9 @@
 .navbar-item div {
     font-size: 15px;
 }
+
+.navbar-item:hover{
+    color: var(--amareloClaro);
+    transition-duration: 0.3s;
+    cursor: pointer;
+}

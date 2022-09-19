@@ -45,11 +45,9 @@ const Navbar = () =>{
                         <div>Notifications</div>
                 </div>
 
-                <div className="navbar-item">
-                    <a href="/">
+                <div className="navbar-item" onClick={() => handleItemCLick('/')}>
                         <img src={signOut} alt="" />
                         <div>Sign Out</div>
-                    </a>
                 </div>
             </div>
         </>
