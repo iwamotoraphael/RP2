@@ -1,0 +1,15 @@
+.language-name{
+    display: inline;
+}
+
+.remove-language-button{
+    display: inline;
+    margin: 0 20px;
+    border: 0;
+    background-color: var(--amareloClaro);
+    cursor: pointer;
+}
+
+.language-container{
+    margin:10px;
+}

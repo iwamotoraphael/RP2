@@ -19,6 +19,8 @@ h2 {
 
 .form-input {
     padding: 10px 0px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 label {
@@ -44,4 +46,31 @@ input::placeholder {
 
 .input_name{
     margin: 0;
+}
+
+.language-input-container{
+    display: inline-block;
+    overflow: auto;
+}
+
+.add-language-button-container{
+    display: inline-block;
+    overflow: auto;
+}
+
+#login_input_language{
+    width: 240px;
+}
+
+.add-language-button{
+    width: 50px;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: var(--amarelo);
+    cursor: pointer;
+}
+
+.add-language-button:hover{
+    background-color: var(--amareloClaro);
+    transition-duration: 0.3s;
 }

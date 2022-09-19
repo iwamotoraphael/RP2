@@ -79,10 +79,12 @@ const SignUpPage = () => {
                         <input name = "confirmPassword" type="password" className='login_input' placeholder='Confirm password' onChange={handleChange}></input>
                     </div>
                     {!isUser && (
-                        <div className='language-input'>
-                            <div className="form-input">
-                                <label htmlFor='languages'>Languages:</label>
-                                <input value={language} name="languages" type="text" className='login_input' placeholder='Languages' onChange={handleLanguageChange}></input>
+                        <div className="form-input">
+                            <label htmlFor='languages'>Languages:</label>
+                            <div className='language-input-container'>
+                                <input value={language} name="languages" type="text" className='login_input' id='login_input_language' placeholder='Languages' onChange={handleLanguageChange}></input>
+                            </div>
+                            <div className='add-language-button-container'>
                                 <button className='add-language-button' type='button' onClick={() => handleAddLanguage()}>+</button>
                             </div>
                         </div>
