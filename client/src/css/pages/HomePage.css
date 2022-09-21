@@ -1,0 +1,20 @@
+.homepage{
+    display: flexbox;
+    align-items: center;
+    text-align: center;
+}
+
+.post{
+    text-align: left;
+    margin: 20px 5px;
+}
+
+.side-profile{
+    margin: 20px 5px;
+}
+
+.homepage-container{
+    margin: auto;
+    max-width: 900px;
+    display: inline-flex;
+}
