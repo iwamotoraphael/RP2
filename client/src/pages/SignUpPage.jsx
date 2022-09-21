@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {v4 as uuidv4} from 'uuid'
+import { useNavigate } from 'react-router-dom';
 
 import UpBar from "../components/UpBar";
 import Button from "../components/Button";
@@ -10,6 +11,7 @@ import "../css/pages/SignUpPage.css";
 import undo from "../img/undo.png";
 
 const SignUpPage = () => {
+    const history = useNavigate();
 
     const [userform, setUserForm] = useState({username: '', password: '', confirmPassword: '',})
     const [ngoform, setNgoForm] = useState({username: '', password: '', confirmPassword: '', languages: []})
@@ -60,11 +62,9 @@ const SignUpPage = () => {
             <UpBar/>
             <div className='signup-container'>
                 
-                <a href="/">
-                    <img className="undo-button" src={undo} alt="Go back button" />
-                </a>
+                <img className="undo-button" src={undo} alt="Go back button" onClick = {() => history(-1)} />
 
-                <h2>Sign Up</h2>
+                {isUser ? (<h2>Sign Up as User</h2>) : (<h2>Sign Up as NGO</h2>)}
                 <form onSubmit={handleSubmit}>
                     <div className="form-input">
                         <label htmlFor='userName'>Username:</label>
@@ -92,7 +92,7 @@ const SignUpPage = () => {
                     <Languages languages={ngoform.languages} _onClick={handleRemoveLanguage}></Languages>
                     <Button onClick={handleSubmit}>Sign Up</Button>
                     <p>
-                        <span onClick={handleSwitch}> {isUser ? 'Registrate as a NGO' : 'Registrate as a person'}</span>
+                        <span className='switch-span' onClick={handleSwitch}> {isUser ? 'Registrate as a NGO' : 'Registrate as a person'}</span>
                     </p>
                 </form> 
                 
