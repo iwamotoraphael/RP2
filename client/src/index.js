@@ -9,6 +9,7 @@ import SignUpPage from "./pages/SignUpPage";
 import HomePage from "./pages/HomePage";
 import NetworkPage from "./pages/NetworkPage";
 import MessagesPage from "./pages/MessagesPage";
+import PostPage from './pages/PostPage'
 
 import "./css/Global.css";
 
@@ -22,6 +23,7 @@ ReactDOM.render(
         <Route path="/home" element = {<HomePage/>}/>
         <Route path="/network" element = {<NetworkPage/>}/>
         <Route path="/messages" element = {<MessagesPage/>}/>
+        <Route path="/post/:postid" element = {<PostPage/>}/>
       </Routes>
     </Router>
   </React.StrictMode>,
