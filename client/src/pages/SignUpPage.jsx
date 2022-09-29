@@ -13,8 +13,8 @@ import undo from "../img/undo.png";
 const SignUpPage = () => {
     const history = useNavigate();
 
-    const [userform, setUserForm] = useState({username: '', password: '', confirmPassword: '',})
-    const [ngoform, setNgoForm] = useState({username: '', password: '', confirmPassword: '', languages: []})
+    const [userform, setUserForm] = useState({languages: []})
+    const [ngoform, setNgoForm] = useState({languages: []})
     const [language, setLanguage] = useState('')
 
     const [isUser, setIsUser] = useState(true);
@@ -35,22 +35,40 @@ const SignUpPage = () => {
     const handleAddLanguage = (e) =>{
         if(language.length>0)
         {
-            const newLanguages = [
+            if(isUser){
+                const newLanguages = [
+                    ...userform.languages,{
+                        name: language,
+                        id: uuidv4(),
+                    }
+                ]
+                
+                setUserForm({...userform, ['languages'] : newLanguages})
+            }
+            else{
+                const newLanguages = [
                 ...ngoform.languages,{
                     name: language,
                     id: uuidv4(),
                 }
-            ]
+                ]
             
-            setNgoForm({...ngoform, ['languages'] : newLanguages})
+                setNgoForm({...ngoform, ['languages'] : newLanguages})
+            }
+            
             setLanguage('')
         }
     }
 
     const handleRemoveLanguage = (language_id) =>{
-        const newLanguages = ngoform.languages.filter(language => language.id !== language_id)
-        setNgoForm({...ngoform, ['languages'] : newLanguages})
-        console.log('remover')
+        if(isUser){
+            const newLanguages = userform.languages.filter(language => language.id !== language_id)
+            setUserForm({...userform, ['languages'] : newLanguages})
+        }
+        else{
+            const newLanguages = ngoform.languages.filter(language => language.id !== language_id)
+            setNgoForm({...ngoform, ['languages'] : newLanguages})
+        }
     }
 
     const handleSwitch = () =>{
@@ -71,6 +89,10 @@ const SignUpPage = () => {
                         <input name="username" type="text" className='login_input' placeholder='Username' onChange={handleChange}></input>
                     </div>
                     <div className="form-input">
+                        <label htmlFor='displayName'>Display name:</label>
+                        <input name="displayName" type="text" className='login_input' placeholder='Display name' onChange={handleChange}></input>
+                    </div>
+                    <div className="form-input">
                         <label htmlFor='password'>Password:</label>
                         <input name = "password" type="password" className='login_input' placeholder='Password' onChange={handleChange}></input>
                     </div>
@@ -78,18 +100,24 @@ const SignUpPage = () => {
                         <label htmlFor='confirmPassword'>Confirm password:</label>
                         <input name = "confirmPassword" type="password" className='login_input' placeholder='Confirm password' onChange={handleChange}></input>
                     </div>
-                    {!isUser && (
+                    {/* Person exclusive */}
+                    {isUser && (
                         <div className="form-input">
-                            <label htmlFor='languages'>Languages:</label>
-                            <div className='language-input-container'>
-                                <input value={language} name="languages" type="text" className='login_input' id='login_input_language' placeholder='Languages' onChange={handleLanguageChange}></input>
-                            </div>
-                            <div className='add-language-button-container'>
-                                <button className='add-language-button' type='button' onClick={() => handleAddLanguage()}>+</button>
-                            </div>
+                        <label htmlFor='originCountry'>Origin country:</label>
+                        <input name = "originCountry" type="text" className='login_input' placeholder='Origin country' onChange={handleChange}></input>
                         </div>
                     )}
-                    <Languages languages={ngoform.languages} _onClick={handleRemoveLanguage}></Languages>
+
+                    <div className="form-input">
+                        <label htmlFor='languages'>Languages:</label>
+                        <div className='language-input-container'>
+                            <input value={language} name="languages" type="text" className='login_input' id='login_input_language' placeholder='Languages' onChange={handleLanguageChange}></input>
+                        </div>
+                        <div className='add-language-button-container'>
+                            <button className='add-language-button' type='button' onClick={() => handleAddLanguage()}>+</button>
+                        </div>
+                    </div>
+                    <Languages languages={isUser ? userform.languages : ngoform.languages} _onClick={handleRemoveLanguage}></Languages>
                     <Button onClick={handleSubmit}>Sign Up</Button>
                     <p>
                         <span className='switch-span' onClick={handleSwitch}> {isUser ? 'Registrate as a NGO' : 'Registrate as a person'}</span>

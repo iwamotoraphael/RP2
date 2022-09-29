@@ -12,7 +12,7 @@ const Header = () =>{
         <>
             <header>
                 <img className="logo" src={logo} alt="Logo" />
-                <h1>WWH</h1>
+                <h1>WH</h1>
                 <div className="search-bar">
                     <img src={search} alt="Search logo" />
                 </div>
