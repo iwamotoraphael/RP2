@@ -100,13 +100,11 @@ const SignUpPage = () => {
                         <label htmlFor='confirmPassword'>Confirm password:</label>
                         <input name = "confirmPassword" type="password" className='login_input' placeholder='Confirm password' onChange={handleChange}></input>
                     </div>
-                    {/* Person exclusive */}
-                    {isUser && (
+                    
                         <div className="form-input">
-                        <label htmlFor='originCountry'>Origin country:</label>
+                        {isUser ? <label htmlFor='originCountry'>Origin country:</label> : <label htmlFor='originCountry'>Country:</label>}
                         <input name = "originCountry" type="text" className='login_input' placeholder='Origin country' onChange={handleChange}></input>
-                        </div>
-                    )}
+                        </div>  
 
                     <div className="form-input">
                         <label htmlFor='languages'>Languages:</label>
@@ -117,6 +115,18 @@ const SignUpPage = () => {
                             <button className='add-language-button' type='button' onClick={() => handleAddLanguage()}>+</button>
                         </div>
                     </div>
+
+                    {/*NGO exclusive*/}
+                    <div className="form-input">
+                        <label htmlFor='address'>Address:</label>
+                        <input name = "address" type="text" className='login_input' placeholder='Address' onChange={handleChange}></input>
+                    </div>
+
+                    <div className="form-input">
+                        <label htmlFor='email'>E-mail:</label>
+                        <input name = "email" type="text" className='login_input' placeholder='E-mail' onChange={handleChange}></input>
+                    </div>
+
                     <Languages languages={isUser ? userform.languages : ngoform.languages} _onClick={handleRemoveLanguage}></Languages>
                     <Button onClick={handleSubmit}>Sign Up</Button>
                     <p>
