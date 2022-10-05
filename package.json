@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "uuid": "^9.0.0"
+    "countries-api": "^2.0.2",
+    "react-hook-form": "^7.36.1",
+    "uuid": "^9.0.0",
+    "yup": "^0.32.11"
   }
 }

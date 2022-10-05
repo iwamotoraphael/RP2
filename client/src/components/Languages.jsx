@@ -3,7 +3,7 @@ import Language from './Language';
 
 const Languages = ({languages, _onClick}) => {
     return (<>
-        {languages.map(language => <Language _onClick={_onClick} language={language}></Language>)}
+        {languages.map((language, index) => <Language _onClick={() => _onClick()} language={language} id={index}></Language>)}
     </>);
 }
  
