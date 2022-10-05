@@ -117,15 +117,19 @@ const SignUpPage = () => {
                     </div>
 
                     {/*NGO exclusive*/}
-                    <div className="form-input">
-                        <label htmlFor='address'>Address:</label>
-                        <input name = "address" type="text" className='login_input' placeholder='Address' onChange={handleChange}></input>
-                    </div>
+                    {!isUser && (<>
+                        <div className="form-input">
+                            <label htmlFor='address'>Address:</label>
+                            <input name = "address" type="text" className='login_input' placeholder='Address' onChange={handleChange}></input>
+                        </div>
+                    
 
-                    <div className="form-input">
-                        <label htmlFor='email'>E-mail:</label>
-                        <input name = "email" type="text" className='login_input' placeholder='E-mail' onChange={handleChange}></input>
-                    </div>
+                        <div className="form-input">
+                            <label htmlFor='email'>E-mail:</label>
+                            <input name = "email" type="text" className='login_input' placeholder='E-mail' onChange={handleChange}></input>
+                        </div>
+                        </>
+                    )}
 
                     <Languages languages={isUser ? userform.languages : ngoform.languages} _onClick={handleRemoveLanguage}></Languages>
                     <Button onClick={handleSubmit}>Sign Up</Button>
