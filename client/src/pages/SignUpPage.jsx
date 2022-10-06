@@ -107,6 +107,7 @@ const SignUpPage = () => {
                             <div className="form-input">
                                 {isUser ? <label htmlFor='originCountry'>Origin country:</label> : <label htmlFor='originCountry'>Country:</label>}
                                 <Field as='select' name = "originCountry" className='login_input' placeholder='Origin country'>
+                                    <option value="" selected>Select a country</option>
                                     {lookup.countries.map((data) => <option value={data.country}>{data.country}</option>)}
                                 </Field>
                                 <div className = 'error-message'>{errors.originCountry}</div>
@@ -143,7 +144,7 @@ const SignUpPage = () => {
                                             return (
                                             <>
                                                 <div className='language-input-container'>
-                                                <Field as='select' name = "originCountry" className='login_input' placeholder='Origin country' id='selectCountry'>
+                                                <Field as='select' name = "originCountry" className='login_input' placeholder='Origin country' value="Select a Country" id='selectCountry'>
                                                     {languages_list.map((language) => <option value={language.name+', '+language.nativeName}>{language.name}, {language.nativeName}</option>)}
                                                 </Field>
                                                 </div>
@@ -161,7 +162,7 @@ const SignUpPage = () => {
                                 <div className = 'error-message'>{errors.languages}</div>
                             </div>
 
-                            <Button type='button'>Sign Up</Button>
+                            <Button type='button' onClick={() => handleSubmit}>Sign Up</Button>
                         </Form>
                     )}
                 </Formik>
