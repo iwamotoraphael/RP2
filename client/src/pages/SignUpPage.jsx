@@ -7,9 +7,13 @@ import UpBar from "../components/UpBar";
 import Button from "../components/Button";
 import Language from '../components/Language';
 
+import languages_list from '../data/languages';
+
 import "../css/pages/SignUpPage.css";
 
 import undo from "../img/undo.png";
+
+const lookup = require('country-code-lookup')
 
 //validation schemas
 const personSchema = Yup.object().shape({
@@ -36,13 +40,9 @@ const SignUpPage = () => {
     const history = useNavigate();
 
     const [isUser, setIsUser] = useState(true);
-    const [language, setLanguage] = useState('')
 
     const handleSwitch = () =>{
         setIsUser(!isUser)
-    }
-    const handleLanguageChange = (e) =>{
-        setLanguage(e.target.value)
     }
 
     const handleSubmit = (values)=>{
@@ -106,7 +106,9 @@ const SignUpPage = () => {
                             
                             <div className="form-input">
                                 {isUser ? <label htmlFor='originCountry'>Origin country:</label> : <label htmlFor='originCountry'>Country:</label>}
-                                <Field name = "originCountry" type="text" className='login_input' placeholder='Origin country' />
+                                <Field as='select' name = "originCountry" className='login_input' placeholder='Origin country'>
+                                    {lookup.countries.map((data) => <option value={data.country}>{data.country}</option>)}
+                                </Field>
                                 <div className = 'error-message'>{errors.originCountry}</div>
                             </div>  
 
@@ -141,10 +143,12 @@ const SignUpPage = () => {
                                             return (
                                             <>
                                                 <div className='language-input-container'>
-                                                    <input value={language} name="languages" type="text" className='login_input' id='login_input_language' placeholder='Languages' onChange={handleLanguageChange}></input>
+                                                <Field as='select' name = "originCountry" className='login_input' placeholder='Origin country' id='selectCountry'>
+                                                    {languages_list.map((language) => <option value={language.name+', '+language.nativeName}>{language.name}, {language.nativeName}</option>)}
+                                                </Field>
                                                 </div>
                                                 <div className='add-language-button-container'>
-                                                    <button className='add-language-button' type='button' onClick={() => {if(language.length>0 && !languages.includes(language)) push(language)}}>+</button>
+                                                    <button className='add-language-button' type='button' onClick={() => {push(document.getElementById('selectCountry').value)}}>+</button>
                                                 </div>
 
                                                 {languages.map((language, index) => <Language _onClick={() => remove()} language={language} id={index}/>)}
