@@ -149,7 +149,7 @@ const SignUpPage = () => {
                                                 </Field>
                                                 </div>
                                                 <div className='add-language-button-container'>
-                                                    <button className='add-language-button' type='button' onClick={() => {push(document.getElementById('selectCountry').value)}}>+</button>
+                                                    <button className='add-language-button' type='button' onClick={() => {if(!languages.includes(document.getElementById('selectCountry').value)) push(document.getElementById('selectCountry').value)}}>+</button>
                                                 </div>
 
                                                 {languages.map((language, index) => <Language _onClick={() => remove()} language={language} id={index}/>)}
