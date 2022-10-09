@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const usuarioSchema = new mongoose.Schema(
+const ngoUsuarioSchema = new mongoose.Schema(
   {
     usuario: {
       type: String,
@@ -24,8 +24,24 @@ const usuarioSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    bioDesc: {
+      type: String,
+      default: ""
+    },
+    ngoVerificado: {
+      type: Boolean,
+      default: false
+    },
+    endereco: {
+      type: String,
+      default: ""
+    },
+    usuariosAdmins: {
+      type: Array,
+      default: []
+    }
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Usuario", usuarioSchema);
+module.exports = mongoose.model("NgoUsuario", ngoUsuarioSchema);
