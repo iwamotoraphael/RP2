@@ -1,13 +1,14 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-const Usuario = require("../models/UsuarioGeral");
+const UsuarioGeral = require("../models/UsuarioGeral");
+const UsuarioNgo = require("../models/UsuarioNgo");
 
-router.post("/signup", async (req, res) => {
+router.post("/signup-geral", async (req, res) => {
   try {
     const salt = await bcrypt.genSalt(10);
     const senhaCript = await bcrypt.hash(req.body.senha, salt);
 
-    const novoUsuario = new Usuario({
+    const novoUsuario = new UsuarioGeral({
       usuario: req.body.usuario,
       email: req.body.email,
       senha: senhaCript,
@@ -21,9 +22,31 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+router.post("/signup-ngo", async (req, res) => {
+    try {
+      const salt = await bcrypt.genSalt(10);
+      const senhaCript = await bcrypt.hash(req.body.senha, salt);
+  
+      const novoUsuario = new UsuarioNgo({
+        usuario: req.body.usuario,
+        email: req.body.email,
+        senha: senhaCript,
+      });
+  
+      const usuario = await novoUsuario.save();
+      res.status(200).json(usuario);
+      
+    } catch (err) {
+      res.status(500);
+    }
+  });
+
 router.post("/signin", async (req, res) => {
     try {
-      const usuario = await Usuario.findOne({ email: req.body.email });
+      const usuario = await UsuarioGeral.findOne({ email: req.body.email });
+        if (!usuario) {
+            usuario = await UsuarioNgo.findOne({ email: req.body.email });
+        }
       !usuario && res.status(404).json("Usuário não encontrado.")
   
       const senhaValida = await bcrypt.compare(req.body.senha, usuario.senha);
