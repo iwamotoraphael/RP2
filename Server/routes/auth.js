@@ -2,6 +2,7 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const UsuarioGeral = require("../models/UsuarioGeral");
 const UsuarioNgo = require("../models/UsuarioNgo");
+const utilsAuth = require("../utils/auth")
 
 router.post("/signup-geral", async (req, res) => {
   try {
@@ -42,19 +43,21 @@ router.post("/signup-ngo", async (req, res) => {
   });
 
 router.post("/signin", async (req, res) => {
-    try {
-      const usuario = await UsuarioGeral.findOne({ email: req.body.email });
-        if (!usuario) {
-            usuario = await UsuarioNgo.findOne({ email: req.body.email });
-        }
-      !usuario && res.status(404).json("Usuário não encontrado.")
-  
-      const senhaValida = await bcrypt.compare(req.body.senha, usuario.senha);
-      !senhaValida && res.status(400).json("Senha incorreta.")
+  try {
+      var usuario = await UsuarioGeral.findOne({ email: req.body.email });
+
+      if(!usuario)
+        usuario = await UsuarioNgo.findOne({ email: req.body.email });
+      
+      !usuario && res.status(404).json("Usuário não encontrado.");
+
+      await utilsAuth.validarSenha(req.body.senha, usuario.senha)
+        && res.status(400).json("Senha Incorreta.");
 
       res.status(200).json(usuario);
-      
+
     } catch (err) {
+      console.log(err)
       res.status(500);
     }
   });
