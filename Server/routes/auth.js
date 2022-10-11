@@ -6,39 +6,33 @@ const utilsAuth = require("../utils/auth")
 
 router.post("/signup-geral", async (req, res) => {
   try {
-    const salt = await bcrypt.genSalt(10);
-    const senhaCript = await bcrypt.hash(req.body.senha, salt);
-
-    const novoUsuario = new UsuarioGeral({
+      const novoUsuario = new UsuarioGeral({
       usuario: req.body.usuario,
       email: req.body.email,
-      senha: senhaCript,
+      senha: await utilsAuth.gerarSenhaComHash(req.body.senha),
     });
 
     const usuario = await novoUsuario.save();
     res.status(200).json(usuario);
     
   } catch (err) {
-    res.status(500);
+    res.status(500).json("Erro no servidor.");
   }
 });
 
 router.post("/signup-ngo", async (req, res) => {
     try {
-      const salt = await bcrypt.genSalt(10);
-      const senhaCript = await bcrypt.hash(req.body.senha, salt);
-  
-      const novoUsuario = new UsuarioNgo({
+        const novoUsuario = new UsuarioNgo({
         usuario: req.body.usuario,
         email: req.body.email,
-        senha: senhaCript,
+        senha: await utilsAuth.gerarSenhaComHash(req.body.senha),
       });
   
       const usuario = await novoUsuario.save();
       res.status(200).json(usuario);
       
     } catch (err) {
-      res.status(500);
+      res.status(500).json("Erro no servidor.");
     }
   });
 
@@ -57,8 +51,7 @@ router.post("/signin", async (req, res) => {
       res.status(200).json(usuario);
 
     } catch (err) {
-      console.log(err)
-      res.status(500);
+      res.status(500).json("Erro no servidor.");
     }
   });
 
