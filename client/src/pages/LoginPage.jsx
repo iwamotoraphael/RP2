@@ -1,21 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 
 import UpBar from "../components/UpBar";
 import Button from "../components/Button";
 
+import { AuthContext } from '../contexts/auth/auth';
+
 import "../css/pages/LoginPage.css";
 
 import undo from "../img/undo.png";
 
+
 const LoginPage = () => {
+    const {login} = useContext(AuthContext)
+
     const history = useNavigate();
 
     const [form, setForm] = useState({username: '', password: '',})
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        
+        login(form.username, form.password)
         console.log(form)
     }
 
