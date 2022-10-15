@@ -9,12 +9,6 @@ const UsuarioNgoSchema = new mongoose.Schema(
       max: 20,
       unique: true,
     },
-    email: {
-      type: String,
-      require: true,
-      max: 50,
-      unique: true,
-    },
     senha: {
       type: String,
       require: true,
@@ -37,6 +31,14 @@ const UsuarioNgoSchema = new mongoose.Schema(
       default: ""
     },
     usuariosAdmins: {
+      type: Array,
+      default: []
+    },
+    idiomas: {
+      type: Array,
+      default: []
+    },
+    membros: {
       type: Array,
       default: []
     }

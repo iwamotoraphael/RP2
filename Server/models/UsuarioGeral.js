@@ -9,12 +9,6 @@ const UsuarioGeralSchema = new mongoose.Schema(
       max: 20,
       unique: true,
     },
-    email: {
-      type: String,
-      require: true,
-      max: 50,
-      unique: true,
-    },
     senha: {
       type: String,
       require: true,
@@ -28,13 +22,17 @@ const UsuarioGeralSchema = new mongoose.Schema(
       type: Array,
       default: []
     },
-    amigos: {
-      type: Array,
-      default: []
-    },
     bioDesc: {
       type: String,
       default: ""
+    },
+    pais: {
+      type: Array,
+      default: []
+    },
+    idiomas: {
+      type: Array,
+      default: []
     }
   },
   { timestamps: true }
