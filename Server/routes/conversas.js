@@ -25,4 +25,15 @@ router.get("/:idUsuario", async (req, res) => {
     }
 })
 
+router.get("/find/:primeiroIdUsuario/:segundoIdUsuario", async (req, res) => {
+    try {
+        const conversa = await Conversa.findOne({
+            membros: { $all: [req.params.primeiroIdUsuario, req.params.segundoIdUsuario]}
+        });
+        res.status(200).json(conversa);
+    } catch (err) {
+        res.status(500).json("Erro no servidor.")
+    }
+});
+
 module.exports = router;
