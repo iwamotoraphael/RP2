@@ -1,0 +1,214 @@
+{
+	"info": {
+		"_postman_id": "bfb8e032-70c3-4f6d-9298-204d9854415c",
+		"name": "WeHelp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23770499"
+	},
+	"item": [
+		{
+			"name": "Criar Usuário Comum",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"usuario\": \"Maria\",\n    \"email\": \"maria@gmail.com\",\n    \"senha\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8800/api/auth/signup-geral",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8800",
+					"path": [
+						"api",
+						"auth",
+						"signup-geral"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Usuário Ngo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"usuario\": \"Refugiados Brasil\",\n    \"senha\": \"1234567\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8800/api/auth/signup-ngo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8800",
+					"path": [
+						"api",
+						"auth",
+						"signup-ngo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Usuário Ngo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"usuario\": \"Centro de Apoio SP\",\n    \"senha\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8800/api/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8800",
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Usuário Comum",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"maria@gmail.com\",\n    \"senha\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8800/api/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8800",
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Usuário Comum",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idUsuario\": \"6344e3e8ffe7ed1fc0e8d9f6\",\n    \"bioDesc\": \"Olá, tudo bem?\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8800/api/usuarios/6344e3e8ffe7ed1fc0e8d9f6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8800",
+					"path": [
+						"api",
+						"usuarios",
+						"6344e3e8ffe7ed1fc0e8d9f6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Usuário Comum",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8800/api/usuarios/6344e3e8ffe7ed1fc0e8d9f6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8800",
+					"path": [
+						"api",
+						"usuarios",
+						"6344e3e8ffe7ed1fc0e8d9f6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Todos os Usuários Ngo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8800/api/usuarios/ngos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8800",
+					"path": [
+						"api",
+						"usuarios",
+						"ngos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
