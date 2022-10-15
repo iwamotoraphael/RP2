@@ -8,6 +8,7 @@ const usuarioRoute = require('./routes/usuarios');
 const authRoute = require('./routes/auth');
 const mensagemRoute = require('./routes/mensagens');
 const conversaRoute = require('./routes/conversas');
+const redeSocialRoute = require('./routes/redesocial');
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/usuarios", usuarioRoute);
 app.use("/api/conversas", conversaRoute);
 app.use("/api/mensagens", mensagemRoute);
+app.use("/api/redesocial", redeSocialRoute);
 
 app.listen(8800, () => {
     console.log("Servidor backend está rodando!")
