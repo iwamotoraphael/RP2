@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import {Formik, Field, Form, FieldArray} from 'formik'
 import * as Yup from 'yup'
 
+import { postNgoSignup, postPersonSignup } from '../services/api';
+
 import UpBar from "../components/UpBar";
 import Button from "../components/Button";
 import Language from '../components/Language';
@@ -45,7 +47,7 @@ const SignUpPage = () => {
         setIsUser(!isUser)
     }
 
-    const handleSubmit = (values)=>{
+    const handleSubmit = async (values)=>{
         console.log(values)
     }
 
@@ -137,6 +139,7 @@ const SignUpPage = () => {
                                 <FieldArray name='languages'>
                                     {
                                         (fieldArrayProps) => {
+                                            console.log('fieldArrayProps', fieldArrayProps)
                                             const {push, remove, form} = fieldArrayProps
                                             const {values} = form
                                             const {languages} = values
@@ -144,12 +147,13 @@ const SignUpPage = () => {
                                             return (
                                             <>
                                                 <div className='language-input-container'>
-                                                <Field as='select' name = "originCountry" className='login_input' placeholder='Origin country' value="Select a Country" id='selectCountry'>
+                                                <Field as='select' name = "language" className='login_input' placeholder='Languages' id='selectLanguage'>
+                                                    <option value="" selected>Select a Language</option>
                                                     {languages_list.map((language) => <option value={language.name+', '+language.nativeName}>{language.name}, {language.nativeName}</option>)}
                                                 </Field>
                                                 </div>
                                                 <div className='add-language-button-container'>
-                                                    <button className='add-language-button' type='button' onClick={() => {if(!languages.includes(document.getElementById('selectCountry').value)) push(document.getElementById('selectCountry').value)}}>+</button>
+                                                    <button className='add-language-button' type='button' onClick={() => {if(!languages.includes(document.getElementById('selectLanguage').value) && document.getElementById('selectLanguage').value.length>0) push(document.getElementById('selectLanguage').value)}}>+</button>
                                                 </div>
 
                                                 {languages.map((language, index) => <Language _onClick={() => remove()} language={language} id={index}/>)}

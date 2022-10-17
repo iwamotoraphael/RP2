@@ -12,6 +12,6 @@ export const postPersonSignup = async (username, displayName, password, originCo
     return await api.post('/signup-geral', {username, displayName, password, originCountry, languages})
 }
 
-export const postNgoSignup = async (username, displayName, password, originCountry, languages) => {
+export const postNgoSignup = async (username, displayName, password, originCountry, languages, email, address) => {
     return await api.post('/signup-ngo', {username, displayName, password, originCountry, email, address, languages})
 }
