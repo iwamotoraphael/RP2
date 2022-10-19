@@ -5,9 +5,18 @@
 .remove-language-button{
     display: inline;
     margin: 0 20px;
-    border: 0;
-    background-color: var(--amareloClaro);
+    border: 2px solid black;
+    width: 33px;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: var(--amarelo);
     cursor: pointer;
+    font-size: 16px;
+}
+
+.remove-language-button:hover{
+    background-color: var(--amareloClaro);
+    transition-duration: 0.3s;
 }
 
 .language-container{

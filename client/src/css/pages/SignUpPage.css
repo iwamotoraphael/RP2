@@ -50,14 +50,28 @@ input::placeholder {
     margin: 0;
 }
 
-.language-input-container{
-    display: inline-block;
-    overflow: auto;
+#select-country {
+    width: 410px;
+    border-radius: 10px;
 }
+
+#select-language {
+    width: 350px;
+    border-radius: 10px;
+}
+
+ .language-input-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 410px;
+} 
 
 .add-language-button-container{
     display: inline-block;
     overflow: auto;
+    width: 50px;
 }
 
 #login_input_language{

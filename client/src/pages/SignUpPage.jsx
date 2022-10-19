@@ -78,7 +78,7 @@ const SignUpPage = () => {
                 
                 <img className="undo-button" src={undo} alt="Go back button" onClick = {() => history(-1)} />
 
-                {isUser ? (<h2>Sign Up as User</h2>) : (<h2>Sign Up as NGO</h2>)}
+                {isUser ? (<h2>Sign Up as Person</h2>) : (<h2>Sign Up as NGO</h2>)}
     
                 <Formik initialValues={isUser ? userInitialValues : ngoInitialValues} 
                 validationSchema = {isUser ? personSchema : ngoSchema}
@@ -108,7 +108,7 @@ const SignUpPage = () => {
                             
                             <div className="form-input">
                                 {isUser ? <label htmlFor='originCountry'>Origin country:</label> : <label htmlFor='originCountry'>Country:</label>}
-                                <Field as='select' name = "originCountry" className='login_input' placeholder='Origin country'>
+                                <Field as='select' name = "originCountry" className='login_input' placeholder='Origin country' id='select-country'>
                                     <option value="" selected>Select a country</option>
                                     {lookup.countries.map((data) => <option value={data.country}>{data.country}</option>)}
                                 </Field>
@@ -139,7 +139,6 @@ const SignUpPage = () => {
                                 <FieldArray name='languages'>
                                     {
                                         (fieldArrayProps) => {
-                                            console.log('fieldArrayProps', fieldArrayProps)
                                             const {push, remove, form} = fieldArrayProps
                                             const {values} = form
                                             const {languages} = values
@@ -147,13 +146,14 @@ const SignUpPage = () => {
                                             return (
                                             <>
                                                 <div className='language-input-container'>
-                                                <Field as='select' name = "language" className='login_input' placeholder='Languages' id='selectLanguage'>
+                                                <Field as='select' name = "language" className='login_input' placeholder='Languages' id='select-language'>
                                                     <option value="" selected>Select a Language</option>
                                                     {languages_list.map((language) => <option value={language.name+', '+language.nativeName}>{language.name}, {language.nativeName}</option>)}
                                                 </Field>
-                                                </div>
+                                                
                                                 <div className='add-language-button-container'>
-                                                    <button className='add-language-button' type='button' onClick={() => {if(!languages.includes(document.getElementById('selectLanguage').value) && document.getElementById('selectLanguage').value.length>0) push(document.getElementById('selectLanguage').value)}}>+</button>
+                                                    <button className='add-language-button' type='button' onClick={() => {if(!languages.includes(document.getElementById('select-language').value) && document.getElementById('select-language').value.length>0) push(document.getElementById('select-language').value)}}>+</button>
+                                                </div>
                                                 </div>
 
                                                 {languages.map((language, index) => <Language _onClick={() => remove()} language={language} id={index}/>)}

@@ -1,11 +1,35 @@
 .post{
-    max-width: 500px;
+    width: 600px;
     width: auto;
-    min-height: 100%;
-    height: auto;
+    min-height: 250px;
+    border-radius: 15px;
+    padding: 0px;
+}
+
+#post-ngo{
+    background-color: rgb(228, 161, 116);
+}
+
+#post-person{
+    /* background-color: rgb(50, 135, 206); */
+    background-color: rgb(102, 196, 102);
+}
+
+.wrapper-post {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wrapper-post-image {
+    margin: 0px 8px;
+}
+
+.wrapper-post-text {
     background-color: var(--amareloClaro);
-    border-radius: 30px;
-    padding: 5px 15px;
+    min-height: 250px;
+    border-radius: 0px 15px 15px 0px;
 }
 
 .post-name{
@@ -23,4 +47,5 @@
 .post-content{
     font-size: 0.9rem;
     margin: 10px 15px 15px 15px;
+    text-align: justify;
 }

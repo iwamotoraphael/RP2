@@ -34,10 +34,14 @@ ReactDOM.render(
           <Route path="/" element = {<FrontPage/>}/>
           <Route path="/login" element = {<LoginPage/>}/>
           <Route path="/signup" element = {<SignUpPage/>}/>
-          <Route path="/home" element = {<Private><HomePage/></Private>}/>
-          <Route path="/network" element = {<Private><NetworkPage/></Private>}/>
-          <Route path="/messages" element = {<Private><MessagesPage/></Private>}/>
-          <Route path="/post/:postid" element = {<Private><PostPage/></Private>}/>
+          <Route path="/home" element = {<HomePage/>}/>
+          <Route path="/network" element = {<NetworkPage/>}/>
+          <Route path="/messages" element = {<MessagesPage/>}/>
+          <Route path="/post/:postid" element = {<PostPage/>}/>
+         {/*<Route path="/home" element = {<HomePage/>}/>
+          <Route path="/network" element = {<NetworkPage/>}/>
+          <Route path="/messages" element = {<MessagesPage/>}/>
+<Route path="/post/:postid" element = {<PostPage/>}/>*/}
         </Routes>
       </AuthProvider>
     </Router>

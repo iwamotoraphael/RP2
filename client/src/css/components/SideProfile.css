@@ -4,7 +4,7 @@
     text-align: center;
     background-color: var(--amareloClaro);
     padding: 50px;
-    border-radius: 30px;
+    border-radius: 15px;
 }
 
 .profile-picture{
@@ -16,6 +16,7 @@
 
 .profile-name{
     font-size: 1rem;
+    font-weight: bold;
 }
 
 .bio{
