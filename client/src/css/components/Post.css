@@ -1,6 +1,5 @@
 .post{
-    width: 600px;
-    width: auto;
+    width: 800px;
     min-height: 250px;
     border-radius: 15px;
     padding: 0px;
@@ -37,6 +36,7 @@
     font-weight: bold;
     margin: 15px;
     margin-bottom: 0px;
+    cursor: pointer;
 }
 
 .post-date{
@@ -48,4 +48,5 @@
     font-size: 0.9rem;
     margin: 10px 15px 15px 15px;
     text-align: justify;
+    word-break: break-all;
 }

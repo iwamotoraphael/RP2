@@ -15,6 +15,33 @@
 
 .homepage-container{
     margin: auto;
-    max-width: 900px;
+    max-width: 1100px;
     display: inline-flex;
+}
+
+.post-form-wrapper{
+    box-sizing: border-box;
+    width: 800px;
+    min-height: 250px;
+    border-radius: 15px;
+    padding: 0px;
+    background-color: var(--amareloClaro); 
+    margin: 20px 20px 0px 20px;
+}
+
+.form-input > textarea {
+    width: auto;
+    margin: 20px 20px 0 20px;
+    border-radius: 15px;
+    /* box-sizing: border-box;
+    border: 2px solid #ccc;
+    background-color: var(--amareloClaro); */
+} 
+
+.label{
+    margin: 20px;
+}
+
+.form-input > textarea::placeholder {
+    padding: 10px 0px 0px 10px;
 }
