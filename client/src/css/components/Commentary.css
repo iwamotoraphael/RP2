@@ -1,0 +1,53 @@
+.commentary{
+    width: 900px;
+    min-height: 250px;
+    border-radius: 15px;
+    padding: 0px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.39);
+    margin: 15px;
+}
+
+#commentary-ngo{
+    background-color: rgb(228, 161, 116);
+}
+
+#commentary-person{
+    background-color: rgb(102, 196, 102);
+}
+
+.commentary-wrapper{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wrapper-commentary-image {
+    margin: 0px 8px;
+}
+
+.wrapper-commentary-text {
+    background-color: #f5efd6;
+    min-height: 250px;
+    border-radius: 0px 15px 15px 0px;
+}
+
+.commentary-name{
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 15px;
+    margin-bottom: 0px;
+    cursor: pointer;
+}
+
+.commentary-date{
+    font-size: 0.6rem;
+    margin: 0px 15px;
+}
+
+.commentary-content{
+    font-size: 0.9rem;
+    margin: 10px 15px 15px 15px;
+    text-align: justify;
+    word-break: break-all;
+}

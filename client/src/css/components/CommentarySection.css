@@ -1,0 +1,41 @@
+.commentary-section-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--amareloClaro);
+    border-radius: 15px;
+    max-width: 1135px;
+    margin: auto;
+}
+
+.form-commentary {
+    margin-bottom: 10px;
+}
+
+.form-commentary-input {
+    width: 900px;
+    margin-bottom: 10px;
+}
+textarea {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.commentary-button-wrapper{
+    text-align: center;
+}
+
+.form-commentary-wrapper textarea{
+    box-sizing: border-box;
+    width: 800px;
+    min-height: 250px;
+    border-radius: 15px;
+    padding: 0px;
+    margin: 20px 20px 0px 20px;
+}
+
+textarea::placeholder {
+    padding: 10px 0px 0px 10px;
+    box-sizing: border-box;
+}

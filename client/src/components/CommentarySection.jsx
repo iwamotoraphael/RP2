@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 
+import '../css/components/CommentarySection.css'
+
 import Button from './Button'
 import Commentary from "./Commentary";
 
@@ -18,8 +20,9 @@ const CommentarySection = () => {
 
     return(
         <div className="commentary-section-wrapper">
-            <form>
-                <div className="form-input">
+            <h3>Comments</h3>
+            <form className="form-commentary">
+                <div className="form-commentary-input">
                     <label htmlFor='content'/>
                     <textarea 
                         name="content" 
@@ -29,12 +32,13 @@ const CommentarySection = () => {
                         placeholder='How can WeHelp? (1000 characters)'
                         onChange={handleChange}></textarea>
                 </div>
-
-                <Button onClick={handleSubmit}>Submit</Button>
+                <div className="commentary-button-wrapper">
+                    <Button className='commentary-button' onClick={handleSubmit}>Submit</Button>
+                </div>
             </form>
 
-            <Commentary commentary_name = 'Teste' commentary_date = '22-10-19' commentary_content = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.' isNgo = {true}></Commentary>
-
+            <Commentary commentary_name = 'Teste' commentary_date = '22-10-19' commentary_content = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.' isNgo = {true}></Commentary>
+            <Commentary commentary_name = 'Teste' commentary_date = '22-10-19' commentary_content = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.' isNgo = {true}></Commentary>
         </div>
     )
 }

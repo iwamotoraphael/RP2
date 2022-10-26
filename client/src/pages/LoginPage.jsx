@@ -1,27 +1,33 @@
 import React, { useState, useContext } from 'react'
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import UpBar from "../components/UpBar";
 import Button from "../components/Button";
 
-import { AuthContext } from '../contexts/auth/auth';
-
 import "../css/pages/LoginPage.css";
 
 import undo from "../img/undo.png";
+import { postLogin } from '../services/api';
 
 
 const LoginPage = () => {
-    const {login} = useContext(AuthContext)
-
     const history = useNavigate();
 
     const [form, setForm] = useState({username: '', password: '',})
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        login(form.username, form.password)
-        console.log(form)
+    const [error_message, setError] = useState('')
+
+    const handleSubmit = async (e) => {
+        try{
+            e.preventDefault()
+            const res = await postLogin(form.username, form.password)
+            console.log(res)
+            localStorage.setItem('user', JSON.stringify(res.data._id))
+            history('/home')
+        }
+        catch(err){
+            setError(err.request.response)
+        }
     }
 
     const handleChange = (e) =>{
@@ -36,6 +42,7 @@ const LoginPage = () => {
                 <img className="undo-button" src={undo} alt="Go back button" onClick = {() => history(-1)}/>
 
                 <h2>Login</h2>
+                <p className='error'>{error_message}</p>
                 <form onSubmit={handleSubmit}>
                     <div className="form-input">
                         <label htmlFor='userName'>Username:</label>

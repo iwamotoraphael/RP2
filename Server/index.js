@@ -9,12 +9,15 @@ const authRoute = require('./routes/auth');
 const mensagemRoute = require('./routes/mensagens');
 const conversaRoute = require('./routes/conversas');
 const redeSocialRoute = require('./routes/redesocial');
+const cors = require('cors')
 
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URL, () => {
     console.log("Banco de dados conectado.")
 });
+
+app.use(cors())
 
 app.use(express.json());
 app.use(helmet());

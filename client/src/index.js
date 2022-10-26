@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 
@@ -14,12 +14,9 @@ import PostPage from './pages/PostPage'
 
 import "./css/Global.css";
 
-import {AuthProvider, AuthContext} from "./contexts/auth/auth"
-
 const Private = ({children}) => {
-    const {authenticated} = useContext(AuthContext)
-
-    if(!authenticated){
+    const recoveredUser = localStorage.getItem('user')
+    if(recoveredUser == null || recoveredUser == ''){
         return <Navigate to='/'/>
     }
 
@@ -29,21 +26,15 @@ const Private = ({children}) => {
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <AuthProvider>
         <Routes>
           <Route path="/" element = {<FrontPage/>}/>
           <Route path="/login" element = {<LoginPage/>}/>
           <Route path="/signup" element = {<SignUpPage/>}/>
-          <Route path="/home" element = {<HomePage/>}/>
-          <Route path="/network" element = {<NetworkPage/>}/>
-          <Route path="/messages" element = {<MessagesPage/>}/>
-          <Route path="/post/:postid" element = {<PostPage/>}/>
-         {/*<Route path="/home" element = {<HomePage/>}/>
-          <Route path="/network" element = {<NetworkPage/>}/>
-          <Route path="/messages" element = {<MessagesPage/>}/>
-<Route path="/post/:postid" element = {<PostPage/>}/>*/}
+          <Route path="/home" element = {<Private><HomePage/></Private>}/>
+          <Route path="/network" element = {<Private><NetworkPage/></Private>}/>
+          <Route path="/messages" element = {<Private><MessagesPage/></Private>}/>
+          <Route path="/post/:postid" element = {<Private><PostPage/></Private>}/>
         </Routes>
-      </AuthProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

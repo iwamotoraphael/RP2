@@ -9,12 +9,18 @@ import network from "../img/network.png";
 import messages from "../img/chats.png";
 import notifications from "../img/notifications.png";
 import signOut from "../img/sign-out.png";
+import { useContext } from "react";
 
 const Navbar = () =>{
     const history = useNavigate();
 
     const handleItemCLick = (_route) =>{
         history(_route)
+    }
+
+    const handleLogout = () => {
+        localStorage.removeItem('user')
+        history('/')
     }
 
     return(
@@ -45,7 +51,7 @@ const Navbar = () =>{
                         <div>Notifications</div>
                 </div>
 
-                <div className="navbar-item" onClick={() => handleItemCLick('/')}>
+                <div className="navbar-item" onClick={() => handleLogout()}>
                         <img src={signOut} alt="" />
                         <div>Sign Out</div>
                 </div>
