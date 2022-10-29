@@ -21,7 +21,6 @@ const LoginPage = () => {
         try{
             e.preventDefault()
             const res = await postLogin(form.username, form.password)
-            console.log(res)
             localStorage.setItem('user', JSON.stringify(res.data._id))
             history('/home')
         }

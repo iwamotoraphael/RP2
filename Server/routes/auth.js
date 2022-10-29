@@ -7,8 +7,11 @@ const utilsAuth = require("../utils/auth");
 router.post("/signup-geral", async (req, res) => {
   try {
       const novoUsuario = new UsuarioGeral({
-      usuario: req.body.usuario,
-      senha: await utilsAuth.gerarSenhaComHash(req.body.senha),
+      usuario: req.body.username,
+      nome: req.body.displayName,
+      senha: await utilsAuth.gerarSenhaComHash(req.body.password),
+      pais: req.body.originCountry,
+      idiomas: req.body.languages 
     });
 
     const usuario = await novoUsuario.save();
@@ -22,8 +25,13 @@ router.post("/signup-geral", async (req, res) => {
 router.post("/signup-ngo", async (req, res) => {
     try {
         const novoUsuario = new UsuarioNgo({
-        usuario: req.body.usuario,
-        senha: await utilsAuth.gerarSenhaComHash(req.body.senha),
+          usuario: req.body.username,
+          nome: req.body.displayName,
+          senha: await utilsAuth.gerarSenhaComHash(req.body.password),
+          pais: req.body.originCountry,
+          idiomas: req.body.languages,
+          email: req.body.email,
+          endereco:req.body.adress
       });
   
       const usuario = await novoUsuario.save();

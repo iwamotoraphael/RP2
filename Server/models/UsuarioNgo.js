@@ -30,6 +30,10 @@ const UsuarioNgoSchema = new mongoose.Schema(
       type: String,
       default: ""
     },
+    email:{
+      type: String,
+      default: ""
+    },
     usuariosAdmins: {
       type: Array,
       default: []

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {Formik, Field, Form, FieldArray} from 'formik'
 import * as Yup from 'yup'
 
-import { postNgoSignup, postPersonSignup } from '../services/api';
+import { api, postNgoSignup, postPersonSignup } from '../services/api';
 
 import UpBar from "../components/UpBar";
 import Button from "../components/Button";
@@ -43,12 +43,26 @@ const SignUpPage = () => {
 
     const [isUser, setIsUser] = useState(true);
 
+    const [error_message, setError] = useState('')
+
     const handleSwitch = () =>{
         setIsUser(!isUser)
     }
 
     const handleSubmit = async (values)=>{
         console.log(values)
+        try{
+            if(isUser){
+                await postPersonSignup(values.username, values.displayName, values.password, values.originCountry, values.languages)
+            }else{
+                await postNgoSignup(values.username, values.displayName, values.password, values.originCountry, values.language, values.email, values.address)
+            }
+
+            history('/login')
+        }
+        catch(err){
+            setError(err.request.response)
+        }
     }
 
     const userInitialValues = {
@@ -79,6 +93,8 @@ const SignUpPage = () => {
                 <img className="undo-button" src={undo} alt="Go back button" onClick = {() => history(-1)} />
 
                 {isUser ? (<h2>Sign Up as Person</h2>) : (<h2>Sign Up as NGO</h2>)}
+
+                <p className='signup-error-message'>{error_message}</p>
     
                 <Formik initialValues={isUser ? userInitialValues : ngoInitialValues} 
                 validationSchema = {isUser ? personSchema : ngoSchema}

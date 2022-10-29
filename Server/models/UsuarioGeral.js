@@ -5,7 +5,14 @@ const UsuarioGeralSchema = new mongoose.Schema(
     usuario: {
       type: String,
       require: true,
-      min: 3,
+      min: 5,
+      max: 20,
+      unique: true,
+    },
+    nome:{
+      type: String,
+      require: true,
+      min: 4,
       max: 20,
       unique: true,
     },
