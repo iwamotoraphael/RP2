@@ -19,4 +19,5 @@
 .friend-name {
     font-size: smaller;
     font-weight: bold;
+    cursor: pointer;
 }
