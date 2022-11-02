@@ -1,0 +1,17 @@
+
+.profile-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.bio-profile {
+    box-sizing: border-box;
+    width: 800px;
+    min-height: 100px;
+    border-radius: 15px;
+    padding: 10px;
+    background-color: var(--amareloClaro); 
+    margin: 20px 20px 0px 20px;
+}

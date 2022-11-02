@@ -25,17 +25,12 @@ const FrontPage = () =>{
             <div className="container-frontpage">
                 <div className="content-container">
                     <h2 className="title-frontpage">Welcome to WWHelp.</h2>
-                    <p>WWHelp help é um site que dereguejonsons de bla bla bla Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!</p>
+                    <p className="description-frontpage">WWHelp help é um site que dereguejonsons de bla bla bla Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!</p>
                     <div className="button_container">
                         <Button onClick={handleLoginCLick}>Login</Button>
                     </div>
                     <div className="button_container">
                         <Button onClick={handleSignUpClick}>Sign Up</Button>
-                    </div>
-                    <div className="button_container">
-                        <a href="/home">
-                            <Button>Botão secreto</Button>
-                        </a>
                     </div>
                 </div>
                 <img src={refugeeImg} alt=""/>
