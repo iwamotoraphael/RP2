@@ -21,7 +21,7 @@
     overflow-y: scroll;
 }
 
-h2 {
+.network-title {
     text-align: left;
     padding: 30px 0px 0px 30px;
 }
