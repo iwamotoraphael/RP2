@@ -1,0 +1,17 @@
+.sent-message {
+    background-color: var(--azul);
+}
+
+.received-message {
+    background-color: var(--amarelo);
+}
+
+.sent-message, .received-message {
+    width: fit-content;
+    min-height: 40px;
+    min-width: 20%;
+    max-width: 45%;
+    border-radius: 15px;
+    padding: 10px;
+    word-break: break-all;
+}

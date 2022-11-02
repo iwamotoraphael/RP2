@@ -1,0 +1,23 @@
+.messages-page-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.chat-miniature-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.messages-page-wrapper > .side-profile {
+    margin: 0px;
+}
+
+.miniature-container {
+    margin: 0 0 15px 0;
+}
+

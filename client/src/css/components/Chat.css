@@ -1,0 +1,27 @@
+.chat-container {
+    width: 848px;
+    height: 532px;
+    background-color: var(--amareloClaro);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.header-picture {
+    width: 80px;
+    height: 80px;
+    float: left;
+    margin-right: 15px;
+    border-radius: 50px;
+}
+
+.header-name {
+    margin: 0;
+    padding: 25px;
+    font-weight: bold;
+    font-size: smaller;
+}
+
+.chat-messages > .sent-message {
+    text-align: right;
+    margin-left: auto;
+}
