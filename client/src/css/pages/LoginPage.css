@@ -17,6 +17,12 @@ h2 {
     padding: 30px;
 }
 
+@media (max-width: 494px) {
+    .login-container {
+        width: 90%;
+    }
+}
+
 .form-input {
     padding: 10px 0px;
 }

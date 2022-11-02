@@ -17,6 +17,12 @@ h2 {
     padding: 30px;
 }
 
+@media (max-width: 494px) {
+    .signup-container {
+        width: 90%;
+    }
+}
+
 .form-input {
     display: flex;
     flex-direction: column;
@@ -67,6 +73,26 @@ input::placeholder {
     justify-content: space-between;
     width: 410px;
 } 
+
+@media (max-width: 494px) {
+    .language-input-container {
+        width: 100%;
+    }
+
+    #select-language {
+        width: 75%;
+    }
+
+    #select-country {
+        width: 100%;
+    }
+}
+
+@media (max-width: 374px) {
+    #select-language, #select-country {
+        font-size: 15px;
+    }
+}
 
 .add-language-button-container{
     display: inline-block;
