@@ -18,7 +18,10 @@ router.post("/signup-geral", async (req, res) => {
     res.status(200).json(usuario);
     
   } catch (err) {
-    res.status(500).json("Server error.");
+    if(err.code == 11000)
+      res.status(500).json("Username is already being used.");
+    else
+      res.status(500).json("Server error.");
   }
 });
 
@@ -38,7 +41,10 @@ router.post("/signup-ngo", async (req, res) => {
       res.status(200).json(usuario);
       
     } catch (err) {
-      res.status(500).json("Server Error.");
+      if(err.code == 11000)
+      res.status(500).json("Username is already being used.");
+      else
+        res.status(500).json("Server error.");
     }
   });
 

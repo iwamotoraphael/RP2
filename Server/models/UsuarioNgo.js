@@ -9,6 +9,13 @@ const UsuarioNgoSchema = new mongoose.Schema(
       max: 20,
       unique: true,
     },
+    nome:{
+      type: String,
+      require: true,
+      min: 4,
+      max: 20,
+      unique: true,
+    },
     senha: {
       type: String,
       require: true,

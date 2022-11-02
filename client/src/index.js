@@ -19,7 +19,6 @@ const Private = ({children}) => {
     if(recoveredUser == null || recoveredUser == ''){
         return <Navigate to='/'/>
     }
-
     return children
 }
 

@@ -40,7 +40,7 @@ const UsuarioGeralSchema = new mongoose.Schema(
     idiomas: {
       type: Array,
       default: []
-    }
+    },
   },
   { timestamps: true }
 );
