@@ -11,6 +11,7 @@ import HomePage from "./pages/HomePage";
 import NetworkPage from "./pages/NetworkPage";
 import MessagesPage from "./pages/MessagesPage";
 import PostPage from './pages/PostPage'
+import ProfilePage from './pages/ProfilePage'
 
 import "./css/Global.css";
 
@@ -34,6 +35,7 @@ ReactDOM.render(
           <Route path="/network" element = {<Private><NetworkPage/></Private>}/>
           <Route path="/messages" element = {<Private><MessagesPage/></Private>}/>
           <Route path="/post/:postid" element = {<Private><PostPage/></Private>}/>
+          <Route path="/profile" element = {<Private><ProfilePage/></Private>}/>
         </Routes>
     </Router>
   </React.StrictMode>,
