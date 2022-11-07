@@ -45,8 +45,8 @@ const ProfilePage = () =>{
                 <div className="post-wrapper">
 
                     <div className="bio-profile">
-                        Atualize sua bio aqui.
-                        <textarea name="bio-text-area" onChange={handleBioChange} id="bio-text" cols="30" rows="10"></textarea>
+                        Update your bio here.
+                        <textarea name="bio-text-area" onChange={handleBioChange} id="bio-text" cols="15" rows="5"></textarea>
                         <button onClick={() => {handleBioSubmit()}}>Atualizar</button>
                     </div>
 

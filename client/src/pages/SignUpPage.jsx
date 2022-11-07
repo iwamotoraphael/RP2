@@ -50,7 +50,6 @@ const SignUpPage = () => {
     }
 
     const handleSubmit = async (values)=>{
-        console.log(values)
         try{
             if(isUser){
                 await postPersonSignup(values.username, values.displayName, values.password, values.originCountry, values.languages)

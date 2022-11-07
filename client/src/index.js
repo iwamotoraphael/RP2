@@ -6,7 +6,7 @@ import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom
 import FrontPage from "./pages/FrontPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-
+import SearchPage from './pages/SearchPage';
 import HomePage from "./pages/HomePage";
 import NetworkPage from "./pages/NetworkPage";
 import MessagesPage from "./pages/MessagesPage";
@@ -37,6 +37,7 @@ ReactDOM.render(
           <Route path="/post/:postid" element = {<Private><PostPage/></Private>}/>
           <Route path="/profile" element = {<Private><ProfilePage/></Private>}/>
           <Route path="/user" element = {<Private><UserPage/></Private>}/>
+          <Route path="/search" element = {<Private><SearchPage/></Private>}/>
         </Routes>
     </Router>
   </React.StrictMode>,

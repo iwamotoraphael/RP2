@@ -1,0 +1,9 @@
+.filters-container{
+    background-color: var(--amareloClaro);
+    margin: 11% auto;
+    text-align: left;
+    font-size: 3ex; 
+    max-width: 350px;
+    border-radius: 20px;
+    padding: 30px;
+}

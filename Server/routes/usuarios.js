@@ -61,4 +61,14 @@ router.get("/ngos", async (req, res) => {
     }
 })
 
+router.get("/persons", async (req, res) => {
+    try {
+        const persons = await UsuarioGeral.find();
+
+        res.status(200).json(persons);
+    } catch (err) {
+        res.status(500).json("Erro no servidor.")
+    }
+})
+
 module.exports = router
