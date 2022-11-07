@@ -9,6 +9,8 @@ import Button from "../components/Button";
 
 const HomePage = () =>{
 
+    const user = JSON.parse(localStorage.getItem('user'))
+
     const [post, setPost] = useState({user_id: localStorage.getItem('user'), content: '', date: ''})
 
     const handleSubmit = (e) => {
@@ -24,7 +26,7 @@ const HomePage = () =>{
         <div className="homepage">
             <Header/>
             <div className="homepage-container">
-                <SideProfile profile_name='Teste' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253' bio='teste'></SideProfile>
+                <SideProfile profile_name={user.nome} profile_pic={user.fotoPerfil} bio={user.bioDesc}></SideProfile>
                 <div className="post-wrapper">
                     <div className="post-form-wrapper">
                         <form>

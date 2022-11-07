@@ -67,10 +67,11 @@ router.post("/signin", async (req, res) => {
 
     !usuario && res.status(404).json("User not found.");
 
-    (await utilsAuth.validarSenha(req.body.password, usuario.senha)) &&
-      res.status(400).json("Invalid password.");
+    (await utilsAuth.validarSenha(req.body.password, usuario.senha)) && res.status(400).json("Invalid password.");
 
-    res.status(200).json(usuario);
+    const {senha, updatedAt, ...other} = usuario._doc
+
+    res.status(200).json(other);
   } catch (err) {
     //res.status(500).json("Erro no servidor.");
     res.status = 500;
