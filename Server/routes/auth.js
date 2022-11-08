@@ -40,7 +40,6 @@ router.post("/signup-ngo", async (req, res) => {
         usuario: req.body.username,
         nome: req.body.displayName,
         senha: await utilsAuth.gerarSenhaComHash(req.body.password),
-        pais: req.body.originCountry,
         idiomas: req.body.languages,
         email: req.body.email,
         endereco: req.body.adress,

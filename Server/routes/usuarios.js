@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { Query } = require('mongoose');
 const UsuarioGeral = require('../models/UsuarioGeral');
 const UsuarioNgo = require('../models/UsuarioNgo');
 const utilsAuth = require("../utils/auth");
@@ -64,6 +65,55 @@ router.get("/ngos", async (req, res) => {
 router.get("/persons", async (req, res) => {
     try {
         const persons = await UsuarioGeral.find();
+
+        res.status(200).json(persons);
+    } catch (err) {
+        res.status(500).json("Erro no servidor.")
+    }
+})
+
+router.get("/ngo/:name?/:languages?", async (req, res) => {
+    try {
+        let ngos
+        if(req.params.name != '\x7F' && JSON.parse(req.params.languages).length > 0){
+            ngos = await UsuarioNgo.find({
+                nome: {$regex: req.params.name},
+                idiomas: JSON.parse(req.params.languages)
+            })
+        }
+        else{
+            ngos = await UsuarioNgo.find({
+                "$or": [
+                    {
+                        nome: {$regex: req.params.name, $options : 'i'},
+                    },
+                    {
+                        idiomas: JSON.parse(req.params.languages)
+                    },
+                ]
+            }) 
+        }
+        res.status(200).json(ngos);
+    } catch (err) {
+        console.log(err)
+        res.status(500).json("Erro no servidor.")
+    }
+})
+
+router.get("/person/:name?/:country?/:languages?", async (req, res) => {
+    try {
+        const query = UsuarioGeral.find()
+
+        if(req.params.name != '\x7F') 
+            query.where('nome').regex('nome', req.params.name)
+
+        if(req.params.country != '\x7F')
+            query.where('pais').equals(req.params.country)
+
+        if(JSON.parse(req.params.languages).length > 0)
+            query.where('idiomas').in(JSON.parse(req.params.languages))
+
+        const persons = await query.exec()
 
         res.status(200).json(persons);
     } catch (err) {

@@ -12,14 +12,40 @@ export const postPersonSignup = async (username, displayName, password, originCo
     return await api.post('/api/auth/signup-geral', {username, displayName, password, originCountry, languages})
 }
 
-export const postNgoSignup = async (username, displayName, password, originCountry, languages, email, address) => {
-    return await api.post('/api/auth/signup-ngo', {username, displayName, password, originCountry, email, address, languages})
+export const postNgoSignup = async (username, displayName, password, languages, email, address) => {
+    return await api.post('/api/auth/signup-ngo', {username, displayName, password, email, address, languages})
 }
 
 export const patchProfile = async (id, data) => {
-    return await api.patch(`/api/usuarios/atualizar-perfil/${id}`, data)
+    return await api.patch(`/api/usuarios/atualizar-perfil/${encodeURIComponent(id)}`, data)
 }
 
 export const getUser = async (id) => {
-    return await api.get(`/api/usuarios/find/${id}`)
+    return await api.get(`/api/usuarios/find/${encodeURIComponent(id)}`)
+}
+
+export const getAllNgos = async () => {
+    return await api.get(`/api/usuarios/ngos`)
+}
+
+export const getAllPersons = async () => {
+    return await api.get(`/api/usuarios/persons`)
+}
+
+export const getSearchNgos = async (name, languages) => {
+    let url = '/api/usuarios/ngo/'
+
+    name=="" ? url += '%7F/' : url += encodeURIComponent(name)+'/'
+
+    return await api.get(url+encodeURIComponent(JSON.stringify(languages)))
+}
+
+export const getSearchPersons = async (name, originCountry, languages) => {
+    let url = '/api/usuarios/person/'
+
+    name=="" ? url += '%7F/' : url += encodeURIComponent(name)+'/'
+
+    originCountry=="" ? url += '%7F/' : url += encodeURIComponent(originCountry)+'/'
+
+    return await api.get(url+encodeURIComponent(JSON.stringify(languages)))
 }

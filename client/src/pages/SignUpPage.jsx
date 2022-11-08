@@ -32,7 +32,6 @@ const ngoSchema = Yup.object().shape({
     displayName: Yup.string().min(4, 'Display name must have at least 4 characters').required('Display name is a required field'),
     password: Yup.string().min(8, 'Your password must have at least 8 characters, an uppercase letter, an lowercase letter and a number').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, 'Your password must have an uppercase letter, an lowercase letter and a number').required(),
     confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required(),
-    originCountry: Yup.string().required('Origin country is a required field'),
     address: Yup.string().required('Address is a required field'),
     email: Yup.string().email('Email must be a valid email').required('Email is a required field'),
     languages: Yup.array().min(1, 'Must select at least one language'),
@@ -54,7 +53,7 @@ const SignUpPage = () => {
             if(isUser){
                 await postPersonSignup(values.username, values.displayName, values.password, values.originCountry, values.languages)
             }else{
-                await postNgoSignup(values.username, values.displayName, values.password, values.originCountry, values.language, values.email, values.address)
+                await postNgoSignup(values.username, values.displayName, values.password, values.language, values.email, values.address)
             }
 
             history('/login')
@@ -120,7 +119,8 @@ const SignUpPage = () => {
                                 <Field name = "confirmPassword" type="password" className='login_input' placeholder='Confirm password' />
                                 <div className = 'error-message'>{errors.confirmPassword}</div>
                             </div>
-                            
+
+                            {isUser && (
                             <div className="form-input">
                                 {isUser ? <label htmlFor='originCountry'>Origin country:</label> : <label htmlFor='originCountry'>Country:</label>}
                                 <Field as='select' name = "originCountry" className='login_input' placeholder='Origin country' id='select-country'>
@@ -128,7 +128,7 @@ const SignUpPage = () => {
                                     {lookup.countries.map((data) => <option value={data.country}>{data.country}</option>)}
                                 </Field>
                                 <div className = 'error-message'>{errors.originCountry}</div>
-                            </div>  
+                            </div>)}  
 
                             {/*==================NGO exclusive=================*/}
                             {!isUser && (<>
@@ -181,7 +181,7 @@ const SignUpPage = () => {
                                 <div className = 'error-message'>{errors.languages}</div>
                             </div>
 
-                            <Button type='button' onClick={() => handleSubmit}>Sign Up</Button>
+                            <Button type='submit' onClick={() => handleSubmit}>Sign Up</Button>
                         </Form>
                     )}
                 </Formik>

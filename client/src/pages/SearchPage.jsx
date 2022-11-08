@@ -7,6 +7,7 @@ import {Formik, Field, Form, FieldArray} from 'formik'
 import languages_list from '../data/languages';
 
 import '../css/pages/SearchPage.css'
+import { getAllNgos, getAllPersons, getSearchNgos, getSearchPersons } from '../services/api';
 
 const lookup = require('country-code-lookup')
 
@@ -23,14 +24,24 @@ const SearchPage = () => {
         languages: [],
     }
 
-    const handleNgoSearch = (values) => {
-        console.log('ngo search')
-        console.log(values)
+    const handleNgoSearch = async (values) => {
+        let retrievedNgos = null
+        if(values.name == '' && values.languages.length == 0)
+            retrievedNgos = await getAllNgos()
+        else
+            retrievedNgos = await getSearchNgos(values.name, values.languages)
+
+        setNgos(retrievedNgos)
     }
 
-    const handlePersonSearch = (values) => {
-        console.log('person search')
-        console.log(values)
+    const handlePersonSearch = async (values) => {
+        let retrievedPersons = null
+        if(values.name == '' && values.originCountry == '' && values.languages.length == 0)
+            retrievedPersons = await getAllPersons()
+        else
+            retrievedPersons = await getSearchPersons(values.name, values.originCountry, values.languages)
+
+        console.log(retrievedPersons)
     }
 
     const handleSwitchMode = () => {
@@ -48,13 +59,13 @@ const SearchPage = () => {
                         <Field name="name" type="text" className='search-input' placeholder='Name' />
                     </div>
 
-                    <div className="search-input">
+                    {!searchNGO && (<div className="search-input">
                         {searchNGO ? <label htmlFor='originCountry'>Country:</label> : <label htmlFor='originCountry'>Origin country:</label>}
                         <Field as='select' name = "originCountry" className='search-input' placeholder='Origin country' id='select-country-search'>
                             <option value="" selected>Select a country</option>
                             {lookup.countries.map((data) => <option value={data.country}>{data.country}</option>)}
                         </Field>
-                    </div>
+                    </div>)}
 
                     <div className="search-input">
                         <label htmlFor='languages'>Languages:</label>
