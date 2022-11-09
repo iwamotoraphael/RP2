@@ -33,8 +33,8 @@ const UsuarioGeralSchema = new mongoose.Schema(
       default: ""
     },
     pais: {
-      type: Array,
-      default: []
+      type: String,
+      default: ""
     },
     idiomas: {
       type: Array,

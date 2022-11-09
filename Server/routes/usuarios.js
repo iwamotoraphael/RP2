@@ -54,7 +54,7 @@ router.get("/find/:id", async (req, res) => {
 
 router.get("/ngos", async (req, res) => {
     try {
-        const ngos = await UsuarioNgo.find();
+        const ngos = await UsuarioNgo.find().select(['_id', 'nome', 'idiomas']);
 
         res.status(200).json(ngos);
     } catch (err) {
@@ -64,7 +64,7 @@ router.get("/ngos", async (req, res) => {
 
 router.get("/persons", async (req, res) => {
     try {
-        const persons = await UsuarioGeral.find();
+        const persons = await UsuarioGeral.find().select(['_id', 'nome', 'pais', 'idiomas']);
 
         res.status(200).json(persons);
     } catch (err) {
@@ -103,6 +103,8 @@ router.get("/ngo/:name?/:languages?", async (req, res) => {
 router.get("/person/:name?/:country?/:languages?", async (req, res) => {
     try {
         const query = UsuarioGeral.find()
+
+        query.select(['_id', 'nome', 'pais', 'idiomas'])
 
         if(req.params.name != '\x7F') 
             query.where('nome').regex('nome', req.params.name)

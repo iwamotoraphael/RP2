@@ -36,7 +36,7 @@ ReactDOM.render(
           <Route path="/messages" element = {<Private><MessagesPage/></Private>}/>
           <Route path="/post/:postid" element = {<Private><PostPage/></Private>}/>
           <Route path="/profile" element = {<Private><ProfilePage/></Private>}/>
-          <Route path="/user" element = {<Private><UserPage/></Private>}/>
+          <Route path="/user/:id" element = {<Private><UserPage/></Private>}/>
           <Route path="/search" element = {<Private><SearchPage/></Private>}/>
         </Routes>
     </Router>

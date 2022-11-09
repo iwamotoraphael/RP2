@@ -3,18 +3,24 @@ import Language from '../components/Language';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import {Formik, Field, Form, FieldArray} from 'formik'
+import PersonSearch from '../components/PersonSearch';
+import NgoSearch from '../components/NgoSearch';
+import { useNavigate } from 'react-router-dom';
 
 import languages_list from '../data/languages';
 
 import '../css/pages/SearchPage.css'
+
 import { getAllNgos, getAllPersons, getSearchNgos, getSearchPersons } from '../services/api';
+
 
 const lookup = require('country-code-lookup')
 
 const SearchPage = () => {
+
+    const history = useNavigate()
     
-    const [ngos, setNgos] = useState({})
-    const [persons, setPersons] = useState({})
+    const [retrievedData, setRetrievedData] = useState([])
 
     const [searchNGO, setSearchNGO] = useState(false)
 
@@ -31,7 +37,7 @@ const SearchPage = () => {
         else
             retrievedNgos = await getSearchNgos(values.name, values.languages)
 
-        setNgos(retrievedNgos)
+        setRetrievedData(retrievedNgos.data)
     }
 
     const handlePersonSearch = async (values) => {
@@ -41,11 +47,15 @@ const SearchPage = () => {
         else
             retrievedPersons = await getSearchPersons(values.name, values.originCountry, values.languages)
 
-        console.log(retrievedPersons)
+        setRetrievedData(retrievedPersons.data)
     }
 
     const handleSwitchMode = () => {
         setSearchNGO(!searchNGO)
+    }
+
+    const handleNavigateUser = (id) => {
+        history(`/user/${encodeURIComponent(id)}`)
     }
 
     return(<>
@@ -102,11 +112,23 @@ const SearchPage = () => {
                 </Form>
             </Formik>
         </div>
+
         {searchNGO ? 
             <div className='swap-mode-container' onClick={() => {handleSwitchMode()}}>Search for a person</div>
         :
             <div className='swap-mode-container' onClick={() => {handleSwitchMode()}}>Search for an NGO</div>
         }
+
+        <div className='search-result-container'>
+            {
+                NgoSearch ? retrievedData.map((ngo) => 
+                    <NgoSearch id = {ngo._id} name={ngo.nome} languages={ngo.idiomas} onClickName={handleNavigateUser}/>
+                ):
+                retrievedData.map((person) => 
+                    <PersonSearch id = {person._id} name={person.nome} originCountry={person.pais} languages={person.idiomas} onClickName={handleNavigateUser}/>
+                )
+            }
+        </div>
 
 
     </>)

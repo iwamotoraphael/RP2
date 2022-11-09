@@ -1,0 +1,10 @@
+.person-search-container{
+    background-color: var(--amareloClaro);
+    width: 300px;
+    margin: 10px;
+    padding: auto;
+}
+
+.person-search-name :hover{
+    cursor: pointer;
+}
