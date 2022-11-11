@@ -2,12 +2,11 @@ const router = require('express').Router();
 const { Query } = require('mongoose');
 const UsuarioGeral = require('../models/UsuarioGeral');
 const UsuarioNgo = require('../models/UsuarioNgo');
-const utilsAuth = require("../utils/auth");
-
+const { verificaToken } = require('../utils/auth');
 //adicionar membro na ong
 //adicionar ong a um perfil
 //etc.
-router.patch("/atualizar-perfil/:id", async (req, res) => {
+router.patch("/atualizar-perfil/:id", verificaToken, async (req, res) => {
     if (req.body.idUsuario === req.params.id) {
         if (req.body.senha) {
             try {

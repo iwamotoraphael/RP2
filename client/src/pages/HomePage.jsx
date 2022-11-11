@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 import '../css/pages/HomePage.css'
 
@@ -6,12 +6,20 @@ import Header from "../components/Header";
 import SideProfile from "../components/SideProfile";
 import Post from "../components/Post";
 import Button from "../components/Button";
+import { getUser } from "../services/api";
+
+const jwt = require('jsonwebtoken');
 
 const HomePage = () =>{
+    const decodedToken = jwt.decode(JSON.parse(localStorage.getItem('user')).token)
 
-    const user = JSON.parse(localStorage.getItem('user'))
+    const [user, setUser] = useState({})
 
-    const [post, setPost] = useState({user_id: localStorage.getItem('user'), content: '', date: ''})
+    const [post, setPost] = useState({user_id: decodedToken.userId, content: '', date: ''})
+
+    useEffect(() => {
+        getUser(decodedToken.userId).then((u) =>{ setUser(u.data)})
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault()

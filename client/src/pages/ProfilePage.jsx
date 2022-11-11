@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import Button from "../components/Button";
+import React, {useState, useEffect} from "react";
 import Header from "../components/Header";
 import SideProfile from "../components/SideProfile";
 import Post from "../components/Post";
@@ -9,20 +8,25 @@ import '../css/pages/HomePage.css';
 
 import { getUser, patchProfile } from "../services/api";
 
+const jwt = require('jsonwebtoken');
 
 const ProfilePage = () =>{
-
-    const user = JSON.parse(localStorage.getItem('user'))
-
+    const decodedToken = jwt.decode(JSON.parse(localStorage.getItem('user')).token)
+    const [user, setUser] = useState({})
     const [newBio, setNewBio] = useState('')
+
+    useEffect(() => {
+        getUser(decodedToken.userId).then((u) =>{ setUser(u.data)})
+    }, [])
 
     const handleBioSubmit = async () => {
         try{
             if(newBio.length > 1){
-                const patchProfileResponse = await patchProfile(user._id, {idUsuario: user._id ,bioDesc: newBio})
+                const patchProfileResponse = await patchProfile(user._id, {idUsuario: user._id ,bioDesc: newBio}, JSON.parse(localStorage.getItem('user')).token)
+                console.log(patchProfileResponse)
                 if(patchProfileResponse.status === 200){
                     const fetchUser = await getUser(user._id)
-                    localStorage.setItem('user', JSON.stringify(fetchUser.data))
+                    setUser(fetchUser.data)
                     setNewBio('')
                     document.getElementById('bio-text').value = ''
                 }

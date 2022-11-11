@@ -9,6 +9,7 @@
     "axios": "^1.1.2",
     "country-code-lookup": "^0.0.20",
     "formik": "^2.2.9",
+    "jsonwebtoken": "^8.5.1",
     "language-list": "^0.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

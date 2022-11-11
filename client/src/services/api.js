@@ -16,8 +16,8 @@ export const postNgoSignup = async (username, displayName, password, languages, 
     return await api.post('/api/auth/signup-ngo', {username, displayName, password, email, address, languages})
 }
 
-export const patchProfile = async (id, data) => {
-    return await api.patch(`/api/usuarios/atualizar-perfil/${encodeURIComponent(id)}`, data)
+export const patchProfile = async (id, data, token) => {
+    return await api.patch(`/api/usuarios/atualizar-perfil/${encodeURIComponent(id)}`, data, {headers: {'x-access-token': token}})
 }
 
 export const getUser = async (id) => {

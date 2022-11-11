@@ -3,6 +3,10 @@ const bcrypt = require("bcrypt");
 const UsuarioGeral = require("../models/UsuarioGeral");
 const UsuarioNgo = require("../models/UsuarioNgo");
 const utilsAuth = require("../utils/auth");
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 router.post("/signup-geral", async (req, res) => {
   try {
@@ -59,18 +63,22 @@ router.post("/signup-ngo", async (req, res) => {
 
 router.post("/signin", async (req, res) => {
   try {
+    let isPerson = true;
+
     var usuario = await UsuarioGeral.findOne({ usuario: req.body.username });
 
-    if (!usuario)
+    if (!usuario){
       usuario = await UsuarioNgo.findOne({ usuario: req.body.username });
+      isPerson = false;
+    }
+      
 
     !usuario && res.status(404).json("User not found.");
 
     (await utilsAuth.validarSenha(req.body.password, usuario.senha)) && res.status(400).json("Invalid password.");
 
-    const {senha, updatedAt, ...other} = usuario._doc
-
-    res.status(200).json(other);
+    const token = jwt.sign({userId: usuario._id, isPerson: isPerson}, process.env.JWT_SECRET, {expiresIn: 3600})
+    res.status(200).json({auth: true, token});
   } catch (err) {
     //res.status(500).json("Erro no servidor.");
     res.status = 500;

@@ -16,6 +16,10 @@ import UserPage from './pages/UserPage'
 
 import "./css/Global.css";
 
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 const Private = ({children}) => {
     const recoveredUser = localStorage.getItem('user')
     if(recoveredUser == null || recoveredUser == ''){
