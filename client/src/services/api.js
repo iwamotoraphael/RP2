@@ -4,6 +4,7 @@ export const api = axios.create({
     baseURL: 'http://localhost:8800',
 })
 
+//auth
 export const postLogin = async (username, password) => {
     return await api.post('/api/auth/signin', {username, password})
 }
@@ -16,6 +17,7 @@ export const postNgoSignup = async (username, displayName, password, languages, 
     return await api.post('/api/auth/signup-ngo', {username, displayName, password, email, address, languages})
 }
 
+//users
 export const patchProfile = async (id, data, token) => {
     return await api.patch(`/api/usuarios/atualizar-perfil/${encodeURIComponent(id)}`, data, {headers: {'x-access-token': token}})
 }
@@ -49,3 +51,7 @@ export const getSearchPersons = async (name, originCountry, languages) => {
 
     return await api.get(url+encodeURIComponent(JSON.stringify(languages)))
 }
+
+//network
+
+//chat

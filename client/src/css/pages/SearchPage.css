@@ -1,9 +1,52 @@
 .filters-container{
     background-color: var(--amareloClaro);
-    margin: 11% auto;
+    margin: 0 20px 20px 20px;
     text-align: left;
     font-size: 3ex; 
     max-width: 350px;
     border-radius: 20px;
     padding: 30px;
+}
+
+.filters-container label, .search-input {
+    width: 100%;
+}
+
+.search-input-wrapper {
+    margin: 10px 0;
+}
+
+.search-language-input-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#search-select-language {
+    width: 230px;
+}
+
+.search-add-language-button-container > button {
+    outline: none;
+    width: 50px;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: var(--amarelo);
+    cursor: pointer;
+}
+
+.search-page-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 50px;
+}
+
+.swap-mode-container {
+    margin: 15px 0;
+    cursor: pointer;
+    text-decoration: underline;
 }

@@ -13,9 +13,6 @@ const Header = () =>{
             <header>
                 <img className="logo" src={logo} alt="Logo" />
                 <h1>WH</h1>
-                <div className="search-bar">
-                    <img src={search} alt="Search logo" />
-                </div>
                 <Navbar/>
             </header>
         </>

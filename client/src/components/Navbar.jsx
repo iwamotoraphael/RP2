@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import "../css/components/Navbar.css"
 
+import search from "../img/search.png";
 import logoUser from "../img/user-logo.png";
 import home from "../img/home.png";
 import network from "../img/network.png";
@@ -26,6 +27,12 @@ const Navbar = () =>{
     return(
         <>
             <div className="navbar">
+
+                <div className="navbar-item" onClick={() => handleItemCLick('/search')}>
+                        <img src={search} alt="" />
+                        <div>Search</div>
+                </div>
+
                 <div className="navbar-item" onClick={() => handleItemCLick('/profile')}>
                         <img src={logoUser} alt="" />
                         <div>Profile</div>

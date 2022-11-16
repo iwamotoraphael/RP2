@@ -8,6 +8,7 @@
 }
 
 .button:hover {
-    background-color: var(--amareloClaro);
+    background-color: black;
+    color: var(--amareloClaro);
     transition: 0.3s;
   }

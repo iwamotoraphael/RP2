@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import Header from "../components/Header";
 import SideProfile from "../components/SideProfile";
 import Post from "../components/Post";
+import Button from "../components/Button";
 
 import "../css/pages/ProfilePage.css";
 import '../css/pages/HomePage.css';
@@ -51,7 +52,7 @@ const ProfilePage = () =>{
                     <div className="bio-profile">
                         Update your bio here.
                         <textarea name="bio-text-area" onChange={handleBioChange} id="bio-text" cols="15" rows="5"></textarea>
-                        <button onClick={() => {handleBioSubmit()}}>Atualizar</button>
+                        <Button onClick={() => {handleBioSubmit()}}>Update</Button>
                     </div>
 
                     <Post post_name='Teste' post_date='2022-09-21' post_content='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, aaaaaaaaaa' post_id={0}></Post>

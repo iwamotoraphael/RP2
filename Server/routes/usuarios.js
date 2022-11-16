@@ -106,7 +106,7 @@ router.get("/person/:name?/:country?/:languages?", async (req, res) => {
         query.select(['_id', 'nome', 'pais', 'idiomas'])
 
         if(req.params.name != '\x7F') 
-            query.where('nome').regex('nome', req.params.name)
+            query.where('nome').regex(req.params.name)
 
         if(req.params.country != '\x7F')
             query.where('pais').equals(req.params.country)
