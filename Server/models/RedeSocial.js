@@ -7,6 +7,7 @@ const RedeSocialSchema = new mongoose.Schema(
             require: true,
             min: 3,
             max: 20,
+            unique: true,
         },
         amigos: {
             type: Array,

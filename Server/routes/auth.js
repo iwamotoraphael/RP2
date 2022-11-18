@@ -5,16 +5,17 @@ const UsuarioNgo = require("../models/UsuarioNgo");
 const utilsAuth = require("../utils/auth");
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const RedeSocial = require("../models/RedeSocial")
 
 dotenv.config();
 
 router.post("/signup-geral", async (req, res) => {
   try {
-    const usuarioNgoExistente = await UsuarioNgo.findOne({
+    let usuarioExistente = await UsuarioNgo.findOne({
       usuario: req.body.username,
     });
 
-    if (!usuarioNgoExistente) {
+    if (!usuarioExistente) {
       const novoUsuario = new UsuarioGeral({
         usuario: req.body.username,
         nome: req.body.displayName,
@@ -23,23 +24,33 @@ router.post("/signup-geral", async (req, res) => {
         idiomas: req.body.languages,
       });
 
+      const novoUsuarioRede = new RedeSocial({
+        usuario: req.body.username,
+        amigos: [],
+        solicitacoes_enviadas: [],
+        solicitacoes_enviadas: [],
+      })
+
+      await novoUsuarioRede.save();
       const usuario = await novoUsuario.save();
       res.status(200).json(usuario);
     } else {
       res.status(500).json("Username is already being used.");
     }
   } catch (err) {
+    if (err.code == 11000)
+      res.status(500).json("Username is already being used.");
     res.status(500).json("Server error.");
   }
 });
 
 router.post("/signup-ngo", async (req, res) => {
   try {
-    const usuarioGeralExistente = await UsuarioGeral.findOne({
+    const usuarioExistente = await UsuarioGeral.findOne({
       usuario: req.body.username,
     });
 
-    if (!usuarioGeralExistente) {
+    if (!usuarioExistente) {
       const novoUsuario = new UsuarioNgo({
         usuario: req.body.username,
         nome: req.body.displayName,
@@ -49,12 +60,20 @@ router.post("/signup-ngo", async (req, res) => {
         endereco: req.body.adress,
       });
 
+      const novoUsuarioRede = new RedeSocial({
+        usuario: req.body.username,
+        amigos: [],
+        solicitacoes_enviadas: [],
+        solicitacoes_enviadas: [],
+      })
+
       const usuario = await novoUsuario.save();
+      await novoUsuarioRede.save();
       res.status(200).json(usuario);
     } else {
       res.status(500).json("Username is already being used.")
     }
-  } catch (err) {
+  } catch (err) {console.log(err)
     if (err.code == 11000)
       res.status(500).json("Username is already being used.");
     else res.status(500).json("Server error.");

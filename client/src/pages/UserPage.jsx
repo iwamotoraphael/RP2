@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { useNavigate } from 'react-router-dom';
 import Header from "../components/Header";
 import SideProfile from "../components/SideProfile";
 import Post from "../components/Post";
@@ -8,13 +9,20 @@ import '../css/pages/HomePage.css';
 import { useParams } from "react-router-dom";
 import { getUser } from "../services/api";
 
+const jwt = require('jsonwebtoken');
+
 const UserPage = () =>{
+    const history = useNavigate();
+
+    const decodedToken = jwt.decode(JSON.parse(localStorage.getItem('user')).token)
 
     const params = useParams()
 
     const [user, setUser] = useState({})
 
     useEffect(() => {
+        if(decodedToken.userId === params.id)
+            history('/profile', {replace: true})
         getUser(params.id).then((u) =>{setUser(u.data); console.log(u)})
     }, [])
 

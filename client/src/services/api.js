@@ -53,5 +53,8 @@ export const getSearchPersons = async (name, originCountry, languages) => {
 }
 
 //network
+export const postSendFriendRequest = async () => {
+    
+}
 
 //chat
