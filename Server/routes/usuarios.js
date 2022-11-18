@@ -37,12 +37,12 @@ router.patch("/atualizar-perfil/:id", verificaToken, async (req, res) => {
 
 router.get("/find/:id", async (req, res) => {
     try {
-        var usuario = await UsuarioGeral.findById(req.params.id);
+        var usuarioBuscado = await UsuarioGeral.findById(req.params.id);
 
-        if(!usuario)
-            usuario = await UsuarioNgo.findById(req.params.id);
+        if(!usuarioBuscado)
+            usuarioBuscado = await UsuarioNgo.findById(req.params.id);
 
-        const {senha, updatedAt, ...other} = usuario._doc
+        const {senha, updatedAt, usuario, ...other} = usuarioBuscado._doc
 
         res.status(200).json(other);
     } catch (err) {

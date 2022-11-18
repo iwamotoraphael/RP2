@@ -24,15 +24,16 @@ router.post("/signup-geral", async (req, res) => {
         idiomas: req.body.languages,
       });
 
+      const usuario = await novoUsuario.save();
+      
       const novoUsuarioRede = new RedeSocial({
-        usuario: req.body.username,
+        usuario: usuario._id,
         amigos: [],
         solicitacoes_enviadas: [],
         solicitacoes_enviadas: [],
       })
-
+      
       await novoUsuarioRede.save();
-      const usuario = await novoUsuario.save();
       res.status(200).json(usuario);
     } else {
       res.status(500).json("Username is already being used.");
@@ -59,15 +60,15 @@ router.post("/signup-ngo", async (req, res) => {
         email: req.body.email,
         endereco: req.body.adress,
       });
+      const usuario = await novoUsuario.save();
 
       const novoUsuarioRede = new RedeSocial({
-        usuario: req.body.username,
+        usuario: usuario._id,
         amigos: [],
         solicitacoes_enviadas: [],
         solicitacoes_enviadas: [],
       })
 
-      const usuario = await novoUsuario.save();
       await novoUsuarioRede.save();
       res.status(200).json(usuario);
     } else {

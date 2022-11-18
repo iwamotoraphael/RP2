@@ -1,41 +1,52 @@
 const router = require('express').Router();
-const UsuarioGeral = require('../models/UsuarioGeral');
 const RedeSocial = require('../models/RedeSocial');
 
+router.get("/rede/:id", async (req, res) => {
+    try{
+        const rede = await RedeSocial.findOne({'usuario': req.params.id}).exec()
+        res.status(200).json(rede)
+    }
+    catch(err){
+        res.status(500).json("Server error")
+    }
+})
+
 router.post("/solicitacoes/:id", async (req, res) => {
-    if (req.body.idUsuario !== req.params.id) {
+    if (req.body.idusuario !== req.params.id) {
         try {
-            const adicionarUsuario = await RedeSocial.findById(req.params.id);
-            const usuarioAtual = await RedeSocial.findById(req.body.idUsuario);
+            const adicionarUsuario = await RedeSocial.findOne({usuario: req.params.id});
+            const usuarioAtual = await RedeSocial.findOne({usuario: req.body.idusuario});
 
             if(!usuarioAtual.amigos.includes(req.params.id)){
-                await adicionarUsuario.updateOne({ $push: { solicitacoes_recebidas: req.body.idUsuario }})
+                await adicionarUsuario.updateOne({ $push: { solicitacoes_recebidas: req.body.idusuario }})
                 await usuarioAtual.updateOne({ $push: {solicitacoes_enviadas: req.params.id }})
-                res.status(200).json("Solicitação de amizade enviada.")
+                res.status(200).json("Friend request sent.")
             } else {
-                res.status(403).json("Usuário já é um amigo.")
+                res.status(403).json("The user is already your friend")
             }
         } catch (err) {
-            res.status(500).json("Erro no servidor.")
+            res.status(500).json("Server error")
         }
 
     } else {
-        res.status(403).json("Usuário não pode adicionar ele mesmo.")
+        res.status(403).json("You can't add yourself.")
     }
 });
 
 router.delete("/solicitacoes/:id", async (req, res) => {
-    if (req.body.idUsuario !== req.params.id) {
+    if (req.body.idusuario !== req.params.id) {
         try {
-            const adicionarUsuario = await RedeSocial.findById(req.params.id);
-            const usuarioAtual = await RedeSocial.findById(req.body.idUsuario);
+            console.log(req.body.idusuario)
+            const adicionarUsuario = await RedeSocial.findOne({usuario: req.params.id});
+            const usuarioAtual = await RedeSocial.findOne({usuario: req.body.idusuario});
 
-            await adicionarUsuario.updateOne({ $remove: { solicitacoes_recebidas: req.body.idUsuario }})
-            await usuarioAtual.updateOne({ $remove: {solicitacoes_enviadas: req.params.id }})
+            await adicionarUsuario.updateOne({ $pull: { solicitacoes_recebidas: req.body.idusuario }})
+            await usuarioAtual.updateOne({ $pull: {solicitacoes_enviadas: req.params.id }})
             res.status(200).json("Solicitação de amizade deletada.")
 
         } catch (err) {
-            res.status(500).json("Erro no servidor.")
+            console.log(err)
+            res.status(500).json("Server error")
         }
     } else {
         res.status(403).json("Usuário não pode excluir solicitações dele mesmo.")
@@ -44,21 +55,21 @@ router.delete("/solicitacoes/:id", async (req, res) => {
 )
 
 router.post("/amigos/:id", async (req, res) => {
-    if (req.body.idUsuario !== req.params.id) {
+    if (req.body.idusuario !== req.params.id) {
         try {
-            const adicionarUsuario = await RedeSocial.findById(req.params.id);
-            const usuarioAtual = await RedeSocial.findById(req.body.idUsuario);
+            const adicionarUsuario = await RedeSocial.findOne({usuario: req.params.id});
+            const usuarioAtual = await RedeSocial.findOne({usuario: req.body.idusuario});
 
             if(!usuarioAtual.amigos.includes(req.params.id)){
-                await usuarioAtual.updateOne({ $remove: { solicitacoes_enviadas: req.params.id }, $push: { amigos: req.params.id }})
-                await adicionarUsuario.updateOne({ $remove: { solicitacoes_recebidas: req.body.idUsuario }, $push: { amigos: req.body.idUsuario }})
+                await usuarioAtual.updateOne({ $pull: { solicitacoes_enviadas: req.params.id }, $push: { amigos: req.params.id }})
+                await adicionarUsuario.updateOne({ $pull: { solicitacoes_recebidas: req.body.idusuario }, $push: { amigos: req.body.idusuario }})
 
-                res.status(200).json("Solicitação de amizade aceita.")
+                res.status(200).json("Friend request accepted.")
             } else {
-                res.status(403).json("Usuário já é um amigo.")
+                res.status(403).json("User is already a friend.")
             }
         } catch (err) {
-            res.status(500).json("Erro no servidor.")
+            res.status(500).json("Server error")
         }
 
     } else {
@@ -68,21 +79,21 @@ router.post("/amigos/:id", async (req, res) => {
 
 
 router.delete("/amigos/:id", async (req, res) => {
-    if (req.body.idUsuario !== req.params.id) {
+    if (req.body.idusuario !== req.params.id) {
         try {
-            const removerUsuario = await RedeSocial.findById(req.params.id);
-            const usuarioAtual = await RedeSocial.findById(req.body.idUsuario);
+            const adicionarUsuario = await RedeSocial.findOne({usuario: req.params.id});
+            const usuarioAtual = await RedeSocial.findOne({usuario: req.body.idusuario});
 
             if(usuarioAtual.amigos.includes(req.params.id)){
-                await usuarioAtual.updateOne({ $remove: { amigos: req.params.id }})
-                await removerUsuario.updateOne({ $remove: { amigos: req.body.idUsuario }})
+                await usuarioAtual.updateOne({ $pull: { amigos: req.params.id }})
+                await removerUsuario.updateOne({ $pull: { amigos: req.body.idusuario }})
 
-                res.status(200).json("Amigo deletado.")
+                res.status(200).json("Friend removed.")
             } else {
-                res.status(403).json("Usuário não é um amigo.")
+                res.status(403).json("USer is not a friend.")
             }
         } catch (err) {
-            res.status(500).json("Erro no servidor.")
+            res.status(500).json("Server error")
         }
 
     } else {
