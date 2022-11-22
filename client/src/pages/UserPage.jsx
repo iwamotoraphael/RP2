@@ -21,7 +21,7 @@ const UserPage = () =>{
 
     const [user, setUser] = useState({})
     const [network, setNetwork] = useState({})
-    const [button, setButton] = useState(<>loading</>)
+    const [button, setButton] = useState(<Button>loading</Button>)
 
     useEffect(async () => {
         if(decodedToken.userId === params.id)
@@ -40,10 +40,14 @@ const UserPage = () =>{
                 setButton(<Button onClick={() => {handleAddFriend()}}>Add Friend</Button>)
         }
     }, [network])
-
+    
     const handleAddFriend = async () => {
         try{
-            return await postSendFriendRequest(params.id, decodedToken.userId)
+            const response = await postSendFriendRequest(params.id, decodedToken.userId)
+
+            getNetworkData(decodedToken.userId).then((n) => {setNetwork(n.data)})
+
+            return response
         }
         catch(err){
             console.log(err)
@@ -52,7 +56,11 @@ const UserPage = () =>{
 
     const handleRemoveFriend = async () => {
         try{
-            return await deleteRemoveFriend(params.id, decodedToken.userId)
+            const response = await deleteRemoveFriend(params.id, decodedToken.userId)
+
+            getNetworkData(decodedToken.userId).then((n) => {setNetwork(n.data)})
+
+            return response
         }
         catch(err){
             console.log(err)
@@ -61,7 +69,11 @@ const UserPage = () =>{
 
     const handleRemoveRequest = async () => {
         try{
-            return await deleteRemoveFriendRequest(params.id, decodedToken.userId)
+            const response = await deleteRemoveFriendRequest(params.id, decodedToken.userId)
+
+            getNetworkData(decodedToken.userId).then((n) => {setNetwork(n.data)})
+
+            return response
         }
         catch(err){
             console.log(err)

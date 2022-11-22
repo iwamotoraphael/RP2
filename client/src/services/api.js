@@ -54,7 +54,7 @@ export const getSearchPersons = async (name, originCountry, languages) => {
 
 //network
 export const postSendFriendRequest = async (friendId, userId) => {
-    return await api.post(`/api/redesocial/solicitacoes/${encodeURIComponent(friendId)}`, {data: {idusuario: userId}})
+    return await api.post(`/api/redesocial/solicitacoes/${encodeURIComponent(friendId)}`, {idusuario: userId})
 }
 
 export const deleteRemoveFriendRequest = async (friendId, userId) => {
@@ -62,10 +62,10 @@ export const deleteRemoveFriendRequest = async (friendId, userId) => {
 }
 
 export const postAcceptFriendRequest = async (friendId, userId) => {
-    return await api.post(`/api/redesocial/amigos/${encodeURIComponent(friendId)}`, {data: {idusuario: userId}})
+    return await api.post(`/api/redesocial/amigos/${encodeURIComponent(friendId)}`, {idusuario: userId})
 }
 
-export const deleteRemoveFriend = async (friendId, userId) => {
+export const deleteRemoveFriend = async (friendId, userId) => { 
     return await api.delete(`/api/redesocial/amigos/${encodeURIComponent(friendId)}`, {data: {idusuario: userId}})
 }
 
