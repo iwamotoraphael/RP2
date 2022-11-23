@@ -53,7 +53,7 @@ const Navbar = () =>{
                         <div>Messages</div>
                 </div>
 
-                <div className="navbar-item">
+                <div className="navbar-item" onClick={() => handleItemCLick('/notifications')}>
                         <img src={notifications} alt="" />
                         <div>Notifications</div>
                 </div>

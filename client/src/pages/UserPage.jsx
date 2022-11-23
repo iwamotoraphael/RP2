@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
+
 import Header from "../components/Header";
 import SideProfile from "../components/SideProfile";
 import Post from "../components/Post";
@@ -23,11 +24,11 @@ const UserPage = () =>{
     const [network, setNetwork] = useState({})
     const [button, setButton] = useState(<Button>loading</Button>)
 
-    useEffect(async () => {
-        if(decodedToken.userId === params.id)
-            history('/profile', {replace: true})
-        getUser(params.id).then((u) =>{setUser(u.data);})
-        getNetworkData(decodedToken.userId).then((n) => {setNetwork(n.data)})
+    useEffect(() => {
+            if(decodedToken.userId === params.id)
+                history('/profile', {replace: true})
+            getUser(params.id).then((u) =>{setUser(u.data);})
+            getNetworkData(decodedToken.userId).then((n) => {setNetwork(n.data)})
     }, [])
 
     useEffect(() => {

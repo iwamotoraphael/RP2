@@ -1,0 +1,30 @@
+.notification-container {
+    background-color: var(--amareloClaro);
+    margin: 10px auto;
+    width: 800px;
+    min-height: 120px;
+    align-items: center;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.notification-username {
+    font-weight: bold;
+}
+
+.notification-username:hover {
+    cursor: pointer;
+}
+
+.notification-photo {
+    float: left;
+    min-width: 80px;
+    min-height: 80px;
+    border-radius: 50%;
+    border: 5px solid var(--amarelo);
+    margin-right: 30px;
+}
+
+.notification-buttons {
+    margin-top: 20px;
+}

@@ -9,6 +9,7 @@ import SignUpPage from "./pages/SignUpPage";
 import SearchPage from './pages/SearchPage';
 import HomePage from "./pages/HomePage";
 import NetworkPage from "./pages/NetworkPage";
+import NotificationPage from './pages/NotificationPage';
 import MessagesPage from "./pages/MessagesPage";
 import PostPage from './pages/PostPage'
 import ProfilePage from './pages/ProfilePage'
@@ -42,6 +43,7 @@ ReactDOM.render(
           <Route path="/profile" element = {<Private><ProfilePage/></Private>}/>
           <Route path="/user/:id" element = {<Private><UserPage/></Private>}/>
           <Route path="/search" element = {<Private><SearchPage/></Private>}/>
+          <Route path="/notifications" element = {<Private><NotificationPage/></Private>}/>
         </Routes>
     </Router>
   </React.StrictMode>,

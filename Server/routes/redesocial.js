@@ -36,8 +36,8 @@ router.post("/solicitacoes/:id", async (req, res) => {
 router.delete("/solicitacoes/:id", async (req, res) => {
     if (req.body.idusuario !== req.params.id) {
         try {
-            console.log(req.body)
             console.log(req.body.idusuario)
+            console.log(req.params.id)
             const adicionarUsuario = await RedeSocial.findOne({usuario: req.params.id});
             const usuarioAtual = await RedeSocial.findOne({usuario: req.body.idusuario});
 
@@ -46,7 +46,6 @@ router.delete("/solicitacoes/:id", async (req, res) => {
             res.status(200).json("Solicitação de amizade deletada.")
 
         } catch (err) {
-            console.log(err)
             res.status(500).json("Server error")
         }
     } else {
@@ -58,18 +57,20 @@ router.delete("/solicitacoes/:id", async (req, res) => {
 router.post("/amigos/:id", async (req, res) => {
     if (req.body.idusuario !== req.params.id) {
         try {
+            console.log(req.body)
             const adicionarUsuario = await RedeSocial.findOne({usuario: req.params.id});
             const usuarioAtual = await RedeSocial.findOne({usuario: req.body.idusuario});
 
             if(!usuarioAtual.amigos.includes(req.params.id)){
-                await usuarioAtual.updateOne({ $pull: { solicitacoes_enviadas: req.params.id }, $push: { amigos: req.params.id }})
-                await adicionarUsuario.updateOne({ $pull: { solicitacoes_recebidas: req.body.idusuario }, $push: { amigos: req.body.idusuario }})
+                await usuarioAtual.updateOne({ $pull: { solicitacoes_recebidas: req.params.id }, $push: { amigos: req.params.id }})
+                await adicionarUsuario.updateOne({ $pull: { solicitacoes_enviadas: req.body.idusuario }, $push: { amigos: req.body.idusuario }})
 
                 res.status(200).json("Friend request accepted.")
             } else {
                 res.status(403).json("User is already a friend.")
             }
         } catch (err) {
+            console.log(err)
             res.status(500).json("Server error")
         }
 
@@ -82,7 +83,7 @@ router.post("/amigos/:id", async (req, res) => {
 router.delete("/amigos/:id", async (req, res) => {
     if (req.body.idusuario !== req.params.id) {
         try {
-            const adicionarUsuario = await RedeSocial.findOne({usuario: req.params.id});
+            const removerUsuario = await RedeSocial.findOne({usuario: req.params.id});
             const usuarioAtual = await RedeSocial.findOne({usuario: req.body.idusuario});
 
             if(usuarioAtual.amigos.includes(req.params.id)){
