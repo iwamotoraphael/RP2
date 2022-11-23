@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const UsuarioGeral = require("../models/UsuarioGeral");
 const UsuarioNgo = require("../models/UsuarioNgo");
+const utilsUser = require("../utils/user");
+const RedeSocial = require("../models/RedeSocial");
 const Post = require("../models/Posts");
 
 router.post("/", async (req, res) => {
@@ -47,6 +49,22 @@ router.get("/:id", async (req, res) => {
         res.status(200).json(post);
     } catch (err) {
         res.status(500).json(err)
+    }
+})
+
+router.get("/timeline", async (req, res) => {
+    let postArray = [];
+    try {
+        const currentUserNet = await RedeSocial.findById(req.body.id);
+        const userPosts = await Post.find({ usuario: currentUserNet._username });
+        const friendsPosts = await Promise.all(
+            currentUserNet.amigos.map((usuarioAmigo) => {
+                Post.find({ usuario: usuarioAmigo });
+            })
+        );
+        res.json(userPosts.concat(...friendsPosts))
+    } catch (err) {
+        res.status(500).json(err);
     }
 })
 
