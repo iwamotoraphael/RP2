@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import SideProfile from "../components/SideProfile";
 import Post from "../components/Post";
 import Button from "../components/Button";
-import { getUser } from "../services/api";
+import { getTimeline, getUser } from "../services/api";
 
 const jwt = require('jsonwebtoken');
 
@@ -17,8 +17,11 @@ const HomePage = () =>{
 
     const [post, setPost] = useState({user_id: decodedToken.userId, content: '', date: ''})
 
+    const [timeline, setTimeline] = useState([])
+
     useEffect(() => {
         getUser(decodedToken.userId).then((u) =>{ setUser(u.data)})
+        getTimeline(decodedToken.userId).then((t) => {setTimeline(t.data)})
     }, [])
 
     const handleSubmit = (e) => {
@@ -50,11 +53,11 @@ const HomePage = () =>{
                             </div>
 
                             <Button onClick={handleSubmit}>Submit</Button>
+
+                            {timeline.map((p) => p?<Post post_name = 'a' post_date = '' post_content = '' post_id = '' isNgo = {false}></Post> : <></>)}
                         </form>
                     </div>
-                    <Post post_name='Teste' post_date='2022-09-21' post_content='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, aaaaaaaaaa' post_id={0} isNgo={true} ></Post>
-                    <Post post_name='Teste' post_date='2022-09-21' post_content=' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit,' post_id={0}></Post>
-                    <Post post_name='Teste' post_date='2022-09-21' post_content=' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit,' post_id={0}></Post>
+                    
                 </div>
             </div>
             

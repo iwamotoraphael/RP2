@@ -73,4 +73,16 @@ export const getNetworkData = async (userId) => {
     return await api.get(`/api/redesocial/rede/${encodeURIComponent(userId)}`)
 }
 
+//posts
+export const postCreatePost = async (userId, postContent, name, isNgo) => {
+    return await api.post(`/api/posts/`, {idusuario: userId, post_content: postContent, name: name, isngo: isNgo})
+}
+
+export const getPost = async (postId) => {
+    return await api.get(`/api/posts/${encodeURIComponent(postId)}`)
+}
+
+export const getTimeline = async (userId) => {
+    return await api.get(`/api/posts/timeline/${encodeURIComponent(userId)}`)
+}
 //chat

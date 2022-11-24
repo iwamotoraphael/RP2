@@ -2,7 +2,13 @@ const mongoose = require("mongoose");
 
 const PostsSchema = new mongoose.Schema(
     {
-        usuario: {
+        idusuario: {
+            type: String,
+            require: true,
+            min: 3,
+            max: 30,
+        },
+        name: {
             type: String,
             require: true,
             min: 3,
@@ -12,7 +18,12 @@ const PostsSchema = new mongoose.Schema(
             type: String,
             require: true,
             max:200
-        }
+        },
+        isngo:{
+            type: Boolean,
+            require: true
+        },
+
     },
     { timestamps: true }
 )
