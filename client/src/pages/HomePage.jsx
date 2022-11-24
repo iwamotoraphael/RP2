@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import SideProfile from "../components/SideProfile";
 import Post from "../components/Post";
 import Button from "../components/Button";
-import { getTimeline, getUser } from "../services/api";
+import { getTimeline, getUser, postCreatePost } from "../services/api";
 
 const jwt = require('jsonwebtoken');
 
@@ -15,7 +15,7 @@ const HomePage = () =>{
 
     const [user, setUser] = useState({})
 
-    const [post, setPost] = useState({user_id: decodedToken.userId, content: '', date: ''})
+    const [post, setPost] = useState('')
 
     const [timeline, setTimeline] = useState([])
 
@@ -24,9 +24,17 @@ const HomePage = () =>{
         getTimeline(decodedToken.userId).then((t) => {setTimeline(t.data)})
     }, [])
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(post.content)
+    const handleSubmit = async (e) => {
+        if(post.length > 0){
+            e.preventDefault()
+            console.log(post.content)
+            console.log(user.nome)
+            const response = await postCreatePost(decodedToken.userId, post, user.nome, user.email !== undefined)
+            console.log(response)
+            if(response.data.status === 200){
+                document.getElementById('content-text').value = ''
+            }
+        }
     }
 
     const handleChange = (e) => {
@@ -44,20 +52,20 @@ const HomePage = () =>{
                             <div className="form-input">
                                 <label htmlFor='content'/>
                                 <textarea 
+                                    id="content-text"
                                     name="content" 
                                     cols="40" rows="5" 
                                     className='post_input' 
                                     maxLength={2000} 
                                     placeholder='How can WeHelp? (2000 characters)'
-                                    onChange={handleChange}></textarea>
+                                    onChange={handleChange}>
+                                    </textarea>
                             </div>
 
                             <Button onClick={handleSubmit}>Submit</Button>
-
-                            {timeline.map((p) => p?<Post post_name = 'a' post_date = '' post_content = '' post_id = '' isNgo = {false}></Post> : <></>)}
                         </form>
                     </div>
-                    
+                    {timeline.map((p) => p?<Post post_name = {p.name} post_date = {p.createdAt} post_content = {p.post_content} post_id = {p._id} isNgo = {p.isNgo}></Post> : <></>)}
                 </div>
             </div>
             
