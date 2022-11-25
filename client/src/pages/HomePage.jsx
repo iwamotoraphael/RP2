@@ -20,7 +20,7 @@ const HomePage = () =>{
     const [timeline, setTimeline] = useState([])
 
     useEffect(() => {
-        getUser(decodedToken.userId).then((u) =>{ setUser(u.data)})
+        getUser(decodedToken.userId).then((u) =>{setUser(u.data)})
         getTimeline(decodedToken.userId).then((t) => {setTimeline(t.data)})
     }, [])
 

@@ -1,10 +1,21 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import Friend from "../components/Friend";
 import Header from "../components/Header";
 
 import '../css/pages/NetworkPage.css'
+import { getNetworkData } from "../services/api";
+
+const jwt = require('jsonwebtoken');
 
 const NetworkPage = () =>{
+    const decodedToken = jwt.decode(JSON.parse(localStorage.getItem('user')).token)
+
+    const [friends, setFriends] = useState([])
+
+    useEffect(() => {
+        getNetworkData(decodedToken.userId).then((n) => {setFriends(n.data.amigos)})
+    }, [])
 
     return (
         <>
@@ -13,37 +24,13 @@ const NetworkPage = () =>{
                 <div className="network-container">
                     <h2 className="network-title">Your friends</h2>
                     <div className="friends-container">
-                        <Friend profile_name='Porquinho' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Teste' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Porquinho' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Teste' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Porquinho' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Teste' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Porquinho' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Teste' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Porquinho' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Porquinho' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Teste' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Porquinho' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Teste' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Porquinho' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Teste' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Porquinho' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Teste' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Porquinho' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
+                        {friends.map((f) => <Friend profile_id={f}></Friend>)}
                     </div>
                 </div>
                 <div className="network-container">
                     <h2 className="network-title">NGOs you follow</h2>
                     <div className="friends-container">
-                        <Friend profile_name='Porquinho' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Teste' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Porquinho' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Teste' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Porquinho' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Teste' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Porquinho' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
-                        <Friend profile_name='Teste' profile_pic='https://i.scdn.co/image/ab6775700000ee8572d6997d9fef4932a4606253'></Friend>
+                        
                     </div>
                 </div>
             </div>
