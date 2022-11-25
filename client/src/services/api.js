@@ -85,4 +85,26 @@ export const getPost = async (postId) => {
 export const getTimeline = async (userId) => {
     return await api.get(`/api/posts/timeline/${encodeURIComponent(userId)}`)
 }
-//chat
+
+//chat: /api/conversas
+
+export const postChat = async (userId, friendId) => {
+    return await api.post(`/api/conversas/`, {idEmissor: userId, idReceptor: friendId})
+}
+
+export const getUserChats = async (userId) => {
+    return await api.get(`/api/conversas/${userId}`)
+}
+
+export const getChat = async (firstUserId, secondUserId) => {
+    return await api.get(`/api/conversas/find/${firstUserId}/${secondUserId}`)
+}
+
+//messages: /api/mensagens
+export const postMessage = async (userId, messageText, chatId) => {
+    return await api.post(`/api/mensagens/`, {id_conversa: chatId, emissor: userId, texto: messageText})
+}
+
+export const getMessages = async (chatId) => {
+    return await api.get(`/api/convemensagensrsas/${chatId}`)
+}
