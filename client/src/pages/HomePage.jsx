@@ -24,10 +24,9 @@ const HomePage = () =>{
         getTimeline(decodedToken.userId).then((t) => {setTimeline(t.data)})
     }, [])
 
-    const handleSubmit = async (e) => {
+    const handleSubmitPost = async () => {
         if(post.length > 0){
-            e.preventDefault()
-            console.log(post.content)
+            console.log(post)
             console.log(user.nome)
             const response = await postCreatePost(decodedToken.userId, post, user.nome, user.email !== undefined)
             console.log(response)
@@ -38,7 +37,7 @@ const HomePage = () =>{
     }
 
     const handleChange = (e) => {
-        setPost({...post, [e.target.name] : e.target.value})
+        setPost(document.getElementById("content-text").value)
     }
 
     return (
@@ -48,22 +47,20 @@ const HomePage = () =>{
                 <SideProfile profile_name={user.nome} profile_pic={user.fotoPerfil} bio={user.bioDesc}></SideProfile>
                 <div className="post-wrapper">
                     <div className="post-form-wrapper">
-                        <form>
-                            <div className="form-input">
-                                <label htmlFor='content'/>
-                                <textarea 
-                                    id="content-text"
-                                    name="content" 
-                                    cols="40" rows="5" 
-                                    className='post_input' 
-                                    maxLength={2000} 
-                                    placeholder='How can WeHelp? (2000 characters)'
-                                    onChange={handleChange}>
-                                    </textarea>
-                            </div>
+                        <div className="form-input">
+                            <label htmlFor='content'/>
+                            <textarea 
+                                id="content-text"
+                                name="content" 
+                                cols="40" rows="5" 
+                                className='post_input' 
+                                maxLength={2000} 
+                                placeholder='How can WeHelp? (2000 characters)'
+                                onChange={handleChange}>
+                                </textarea>
+                        </div>
 
-                            <Button onClick={handleSubmit}>Submit</Button>
-                        </form>
+                        <Button onClick={() => {handleSubmitPost()}}>Submit</Button>
                     </div>
                     {timeline.map((p) => p?<Post post_name = {p.name} post_date = {p.createdAt} post_content = {p.post_content} post_id = {p._id} isNgo = {p.isNgo}></Post> : <></>)}
                 </div>

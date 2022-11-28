@@ -1,21 +1,28 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 import '../css/components/CommentarySection.css'
+import { getPostCommentaries, postCommentary } from "../services/api";
 
 import Button from './Button'
 import Commentary from "./Commentary";
 
-const CommentarySection = () => {
+const CommentarySection = ({commentaryUser, postId}) => {
+    const [commentary, setCommentary] = useState('')
+    const [commentaries, setCommentaries] = useState([])
 
-    const [commentary, setPost] = useState({user_id: localStorage.getItem('user'), content: '', date: ''})
+    useEffect(() => {
+        getPostCommentaries(postId).then((c) => {setCommentaries(c.data)})
+    }, [])
 
     const handleChange = (e) => {
-        setPost({...commentary, [e.target.name] : e.target.value})
+        setCommentary(document.getElementById("commentary-text").value)
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(commentary.content)
+        await postCommentary(commentaryUser._id, commentary, commentaryUser.nome, commentaryUser.email !== undefined, postId)
+        document.getElementById("commentary-text").value = ''
+        getPostCommentaries(postId).then((c) => {setCommentaries(c.data)})
     }
 
     return(
@@ -26,6 +33,7 @@ const CommentarySection = () => {
                     <label htmlFor='content'/>
                     <textarea 
                         name="content" 
+                        id="commentary-text"
                         cols="40" rows="5" 
                         className='post_input' 
                         maxLength={1000} 
@@ -37,8 +45,7 @@ const CommentarySection = () => {
                 </div>
             </form>
 
-            <Commentary commentary_name = 'Teste' commentary_date = '22-10-19' commentary_content = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.' isNgo = {true}></Commentary>
-            <Commentary commentary_name = 'Teste' commentary_date = '22-10-19' commentary_content = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit.' isNgo = {true}></Commentary>
+            {commentaries.map((c) => <Commentary commentary_name = {c.name} commentary_date = {c.createdAt} commentary_content = {c.commentary_content} isNgo = {c.isngo}></Commentary>)}
         </div>
     )
 }

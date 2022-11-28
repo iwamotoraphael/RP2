@@ -86,6 +86,15 @@ export const getTimeline = async (userId) => {
     return await api.get(`/api/posts/timeline/${encodeURIComponent(userId)}`)
 }
 
+//commentaries
+export const postCommentary = async (userId, commentaryContent, name, isNgo, postId) => {
+    return await api.post(`/api/comentarios/`, {idusuario: userId, commentary_content: commentaryContent, name: name, isngo: isNgo, idpost: postId})
+}
+
+export const getPostCommentaries = async (postId) => {
+    return await api.get(`/api/comentarios/${encodeURIComponent(postId)}`)
+}
+
 //chat: /api/conversas
 
 export const postChat = async (userId, friendId) => {

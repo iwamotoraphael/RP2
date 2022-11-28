@@ -10,6 +10,7 @@ const mensagemRoute = require('./routes/mensagens');
 const conversaRoute = require('./routes/conversas');
 const redeSocialRoute = require('./routes/redesocial');
 const postsRoute = require('./routes/posts');
+const comentarioRoute = require('./routes/comentarios')
 const cors = require('cors')
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.use("/api/conversas", conversaRoute);
 app.use("/api/mensagens", mensagemRoute);
 app.use("/api/redesocial", redeSocialRoute);
 app.use("/api/posts", postsRoute);
+app.use("/api/comentarios", comentarioRoute);
 
 app.listen(8800, () => {
     console.log("Servidor backend está rodando!")
