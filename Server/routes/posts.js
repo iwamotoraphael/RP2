@@ -50,14 +50,24 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+router.get("/usuario/:id", async (req, res) => {
+    try {
+        const posts = await Post.find({idusuario: req.params.id}).exec();
+        res.status(200).json(posts);
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+})
+
 router.get("/timeline/:id", async (req, res) => {
     let postArray = [];
     try {
         const currentUserNet = await RedeSocial.find({usuario: req.params.id}).exec();
-        const userPosts = await Post.find({ usuario: currentUserNet[0].usuario }).exec();
+        const userPosts = await Post.find({ idusuario: currentUserNet[0].usuario }).exec();
         const friendsPosts = await Promise.all(
             currentUserNet[0].amigos.map((usuarioAmigo) => {
-                Post.find({ usuario: usuarioAmigo }).exec();
+                Post.find({ idusuario: usuarioAmigo }).exec();
             })
         );
         res.json(userPosts.concat(...friendsPosts))

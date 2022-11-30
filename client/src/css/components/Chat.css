@@ -4,6 +4,23 @@
     background-color: var(--amareloClaro);
     border-radius: 15px;
     padding: 20px;
+    box-sizing: border-box;
+}
+
+.chat-messages {
+    height: 80%;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0;
+    width: 100%;
+    scroll-margin-inline-end: revert;
+}
+
+.chat-message-bar > input {
+    width: 90%;
+    display: block;
+    margin: auto;
 }
 
 .header-picture {

@@ -9,7 +9,7 @@ import Button from "../components/Button";
 import "../css/pages/ProfilePage.css";
 import '../css/pages/HomePage.css';
 import { useParams } from "react-router-dom";
-import { deleteRemoveFriend, deleteRemoveFriendRequest, getNetworkData, getUser, postSendFriendRequest } from "../services/api";
+import { deleteRemoveFriend, deleteRemoveFriendRequest, getNetworkData, getUser, getUserPost, getUserPosts, postSendFriendRequest } from "../services/api";
 
 const jwt = require('jsonwebtoken');
 
@@ -23,12 +23,14 @@ const UserPage = () =>{
     const [user, setUser] = useState({})
     const [network, setNetwork] = useState({})
     const [button, setButton] = useState(<Button>loading</Button>)
+    const [posts, setPosts] = useState([])
 
     useEffect(() => {
             if(decodedToken.userId === params.id)
                 history('/profile', {replace: true})
             getUser(params.id).then((u) =>{setUser(u.data);})
             getNetworkData(decodedToken.userId).then((n) => {setNetwork(n.data)})
+            getUserPosts(params.id).then((posts) => {setPosts(posts.data)})
     }, [])
 
     useEffect(() => {
@@ -91,10 +93,7 @@ const UserPage = () =>{
                 </div>
                 
                 <div className="post-wrapper">
-
-                    <Post post_name='Teste' post_date='2022-09-21' post_content='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, aaaaaaaaaa' post_id={0}></Post>
-                    <Post post_name='Teste' post_date='2022-09-21' post_content=' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit,' post_id={0}></Post>
-                    <Post post_name='Teste' post_date='2022-09-21' post_content=' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit,' post_id={0}></Post>
+                    {posts.map((p) => <Post post_name = {p.name} post_date = {p.createdAt} post_content = {p.post_content} post_id = {p._id} isNgo = {p.isngo}></Post>)}
                 </div>
             </div>
         </>

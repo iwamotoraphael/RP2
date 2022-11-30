@@ -7,7 +7,7 @@ header {
     display: flex;
     align-items: center;
     max-width: 1920px;
-    max-height: 115px;
+    /* max-height: 115px; */
     background-color: var(--azul);
     margin: 0;
     padding: 15px;  

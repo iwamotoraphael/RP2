@@ -27,12 +27,6 @@ const NetworkPage = () =>{
                         {friends.map((f) => <Friend profile_id={f}></Friend>)}
                     </div>
                 </div>
-                <div className="network-container">
-                    <h2 className="network-title">NGOs you follow</h2>
-                    <div className="friends-container">
-                        
-                    </div>
-                </div>
             </div>
         </>
     )

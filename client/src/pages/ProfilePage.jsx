@@ -7,7 +7,7 @@ import Button from "../components/Button";
 import "../css/pages/ProfilePage.css";
 import '../css/pages/HomePage.css';
 
-import { getUser, patchProfile } from "../services/api";
+import { getUser, patchProfile, getUserPosts } from "../services/api";
 
 const jwt = require('jsonwebtoken');
 
@@ -15,9 +15,11 @@ const ProfilePage = () =>{
     const decodedToken = jwt.decode(JSON.parse(localStorage.getItem('user')).token)
     const [user, setUser] = useState({})
     const [newBio, setNewBio] = useState('')
+    const [posts, setPosts] = useState([])
 
     useEffect(() => {
         getUser(decodedToken.userId).then((u) =>{ setUser(u.data)})
+        getUserPosts(decodedToken.userId).then((posts) => {setPosts(posts.data)})
     }, [])
 
     const handleBioSubmit = async () => {
@@ -55,9 +57,7 @@ const ProfilePage = () =>{
                         <Button onClick={() => {handleBioSubmit()}}>Update</Button>
                     </div>
 
-                    <Post post_name='Teste' post_date='2022-09-21' post_content='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, aaaaaaaaaa' post_id={0}></Post>
-                    <Post post_name='Teste' post_date='2022-09-21' post_content=' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit,' post_id={0}></Post>
-                    <Post post_name='Teste' post_date='2022-09-21' post_content=' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro vitae, atque nulla repudiandae quae corporis, tenetur officia, natus deserunt error accusamus ex dolorem rem quod nesciunt ducimus qui dicta laborum!Lorem ipsum dolor sit,' post_id={0}></Post>
+                    {posts.map((p) => <Post post_name={p.name} post_date = {p.createdAt} post_content = {p.post_content} post_id = {p._id} isNgo = {p.isngo}></Post>)}
                 </div>
             </div>
         </>

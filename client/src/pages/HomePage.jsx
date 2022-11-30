@@ -29,9 +29,10 @@ const HomePage = () =>{
             console.log(post)
             console.log(user.nome)
             const response = await postCreatePost(decodedToken.userId, post, user.nome, user.email !== undefined)
-            console.log(response)
-            if(response.data.status === 200){
+            console.log(response.status)
+            if(response.status === 200){
                 document.getElementById('content-text').value = ''
+                getTimeline(decodedToken.userId).then((t) => {setTimeline(t.data)})
             }
         }
     }
@@ -62,7 +63,7 @@ const HomePage = () =>{
 
                         <Button onClick={() => {handleSubmitPost()}}>Submit</Button>
                     </div>
-                    {timeline.map((p) => p?<Post post_name = {p.name} post_date = {p.createdAt} post_content = {p.post_content} post_id = {p._id} isNgo = {p.isNgo}></Post> : <></>)}
+                    {timeline.map((p) => p?<Post post_name = {p.name} post_date = {p.createdAt} post_content = {p.post_content} post_id = {p._id} isNgo = {p.isngo}></Post> : <></>)}
                 </div>
             </div>
             

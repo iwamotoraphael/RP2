@@ -5,7 +5,7 @@ router.post("/", async (req, res) => {
     const novaMensagem = new Mensagem(req.body);
 
     try {
-        const mensagemSalva = novaMensagem.save();
+        const mensagemSalva = await novaMensagem.save();
         res.status(200).json(mensagemSalva)
     } catch (err) {
         res.status(500).json("Erro no servidor.")

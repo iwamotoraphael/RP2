@@ -21,3 +21,11 @@
     margin: 0 0 15px 0;
 }
 
+.no-friends-message {
+    background-color: var(--amareloClaro);
+    padding: 10px;
+    border-radius: 20px;
+    text-align: center;
+    margin: 0px auto;
+}
+

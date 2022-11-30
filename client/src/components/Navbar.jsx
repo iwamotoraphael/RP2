@@ -24,9 +24,26 @@ const Navbar = () =>{
         history('/')
     }
 
+    const handleAddResponsiveness = () => {
+        var x = document.getElementById("myTopNav");
+        if (x.className === "navbar topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "navbar topnav";
+        }
+    }
+
     return(
         <>
-            <div className="navbar">
+            <div className="navbar topnav" id="myTopNav">
+
+                <div className="navbar-icon" onClick={() => handleAddResponsiveness()}>
+                        <svg viewBox="0 0 100 80" width="40" height="40">
+                                <rect width="100" height="20"></rect>
+                                <rect y="30" width="100" height="20"></rect>
+                                <rect y="60" width="100" height="20"></rect>
+                        </svg>
+                </div>
 
                 <div className="navbar-item" onClick={() => handleItemCLick('/search')}>
                         <img src={search} alt="" />
@@ -62,6 +79,7 @@ const Navbar = () =>{
                         <img src={signOut} alt="" />
                         <div>Sign Out</div>
                 </div>
+
             </div>
         </>
     )
