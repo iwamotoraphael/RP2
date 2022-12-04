@@ -45,6 +45,11 @@ const Navbar = () =>{
                         </svg>
                 </div>
 
+                <div className="navbar-item" onClick={() => handleItemCLick('/home')}>
+                        <img src={home} alt="" />
+                        <div>Home</div>
+                </div>
+
                 <div className="navbar-item" onClick={() => handleItemCLick('/search')}>
                         <img src={search} alt="" />
                         <div>Search</div>
@@ -53,11 +58,6 @@ const Navbar = () =>{
                 <div className="navbar-item" onClick={() => handleItemCLick('/profile')}>
                         <img src={logoUser} alt="" />
                         <div>Profile</div>
-                </div>
-
-                <div className="navbar-item" onClick={() => handleItemCLick('/home')}>
-                        <img src={home} alt="" />
-                        <div>Home</div>
                 </div>
 
                 <div className="navbar-item" onClick={() => handleItemCLick('/network')}>

@@ -9,7 +9,7 @@ const UpBar = () =>{
         <>
             <nav className="up-bar_background">
                 <img className="logo" src={logo} alt="Logo" />
-                <h1>WWHelp</h1>
+                <h1>WeHelp</h1>
             </nav>
         </>
     )

@@ -1,6 +1,6 @@
 .container-frontpage{
     margin: 8% auto;
-    padding: 60px 30px;
+    padding: 50px 30px;
     text-align: center; 
     max-width: 900px;
     border-radius: 10px;
@@ -22,6 +22,7 @@
 
 .description-frontpage {
     text-align: justify;
+    font-size: 15px;
 }
 
 .button_container{
