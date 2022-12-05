@@ -22,7 +22,6 @@ const Chat = ({friendId, socket}) => {
             getChat(decodedToken.userId, friendId).then((c) => {setChat(c.data)})
         }
         socket.on("getMensagem", (data) => {
-            console.log('msg')
             setArrivalMessage({
                 emissor: data.idEmissor,
                 texto: data.textoMensagem,

@@ -61,15 +61,11 @@ router.get("/usuario/:id", async (req, res) => {
 })
 
 router.get("/timeline/:id", async (req, res) => {
-    let postArray = [];
     try {
         const currentUserNet = await RedeSocial.find({usuario: req.params.id}).exec();
         const userPosts = await Post.find({ idusuario: currentUserNet[0].usuario }).exec();
-        const friendsPosts = await Promise.all(
-            currentUserNet[0].amigos.map((usuarioAmigo) => {
-                Post.find({ idusuario: usuarioAmigo }).exec();
-            })
-        );
+        const friendsPosts = await Post.find({ idusuario: currentUserNet[0].amigos })
+
         res.json(userPosts.concat(...friendsPosts))
     } catch (err) {
         console.log(err)
