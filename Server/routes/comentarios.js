@@ -14,7 +14,6 @@ router.post("/", async (req, res) => {
 router.get("/:postId", async (req, res) => {
     try{
         const commentaries = await Comentario.find({idpost: req.params.postId}).exec()
-        console.log(commentaries)
         res.json(commentaries)
     }
     catch(err){

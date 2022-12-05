@@ -91,8 +91,10 @@ export const getTimeline = async (userId) => {
 }
 
 //commentaries
-export const postCommentary = async (userId, commentaryContent, name, isNgo, postId) => {
-    return await api.post(`/api/comentarios/`, {idusuario: userId, commentary_content: commentaryContent, name: name, isngo: isNgo, idpost: postId})
+export const postCommentary = async (userId, commentaryContent, postId) => {
+    const user = await (await api.get(`/api/usuarios/find/${encodeURIComponent(userId)}`)).data
+    console.log(user)
+    return await api.post(`/api/comentarios/`, {idusuario: userId, commentary_content: commentaryContent, name: user.nome, isngo: user.email!==undefined, idpost: postId})
 }
 
 export const getPostCommentaries = async (postId) => {

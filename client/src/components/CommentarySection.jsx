@@ -20,7 +20,7 @@ const CommentarySection = ({commentaryUser, postId}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await postCommentary(commentaryUser._id, commentary, commentaryUser.nome, commentaryUser.email !== undefined, postId)
+        await postCommentary(commentaryUser, commentary, postId)
         document.getElementById("commentary-text").value = ''
         getPostCommentaries(postId).then((c) => {setCommentaries(c.data)})
     }
