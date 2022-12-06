@@ -15,7 +15,7 @@ const removerUsuario = (idSocket) => {
 }
 
 const getUsuario = (idUsuario) => {
-    return usuarios.find(usuario => usuario.idUsuario === idUsuario);
+    return usuarios.find(usuario => usuario.idUsuario == idUsuario);
 }
 
 io.on("connection", (socket) => {
@@ -24,13 +24,16 @@ io.on("connection", (socket) => {
         adicionarUsuario(idUsuario, socket.id);
         io.emit("getUsuarios", usuarios);
     });
-
+    
     socket.on("enviarMensagem", ({idEmissor, idReceptor, textoMensagem}) => {
-        const usuario = getUsuario(idReceptor);
-        io.to(usuario.idSocket).emit("getMensagem", {
-            idEmissor,
-            textoMensagem
-        });
+        const usuarioMensagem = getUsuario(idReceptor);
+
+        if(usuarioMensagem !== undefined){
+            io.to(usuarioMensagem.idSocket).emit("getMensagem", {
+                idEmissor,
+                textoMensagem
+            });
+        } 
     })
 
     socket.on("disconnect", () => {
